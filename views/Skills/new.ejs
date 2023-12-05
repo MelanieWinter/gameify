@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+    <h1><%= title %></h1>
+
+    <form action="/skills" method="POST">
+        <label>
+            Skill Name: <input type="text" name="skillName">
+        </label><br>
+        <label>
+            Category: <input type="text" name="category">
+        </label><br>
+        <label>
+            Description: <input type="text" name="description">
+        </label><br>
+        <label>
+            Your Why: <input type="text" name="yourWhy">
+        </label><br>
+        <label>
+            Priority: 
+            <select name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </label><br>
+        <button type="submit">Add Skill</button>
+    </form>
+
+    <p><%= errorMsg %></p>
+
+<%- include('../partials/footer') %>

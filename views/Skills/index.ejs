@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+    <h1><%= title %></h1>
+
+    <div>
+        <% skills.forEach(function(s) { %>
+            <div>
+                <span class="bold">Skill Name:</span> <span class="margin-r2"><%= s.skillName %></span>
+                <span class="bold">Percent Completed:</span> <span class="margin-r2"><%= s.percentCompleted %>%</span>
+                <span><a href="/skills/<%= s._id %>">Details</a></span> 
+                <!-- add route and controller for this! -->
+            </div>
+        <% }) %>
+        <div>
+            <a href="/skills/new">New Skill</a>
+        </div>
+    </div>
+
+<%- include('../partials/footer') %>

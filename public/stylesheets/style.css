@@ -1,8 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Jura', sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+img {
+  height: 3.5em;
+  width: 3.5em
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.margin-r2 {
+  margin-right: 2vmin;
 }
