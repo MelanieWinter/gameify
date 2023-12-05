@@ -27,7 +27,7 @@ skillSchema = new Schema({
     completed: {
         type: Boolean,
         default: false,
-        enum: ['true', 'false'] // remember you made this ENUM!!!
+        enum: [ true, false ]
     }
 })
 

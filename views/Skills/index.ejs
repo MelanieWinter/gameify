@@ -5,9 +5,8 @@
     <div>
         <% skills.forEach(function(s) { %>
             <div>
-                <span class="bold">Skill Name:</span> <span class="margin-r2"><%= s.skillName %></span>
-                <span class="bold">Percent Completed:</span> <span class="margin-r2"><%= s.percentCompleted %>%</span>
-                <span><a href="/skills/<%= s._id %>">Details</a></span> 
+                <span><a href="/skills/<%= s._id %>"><%= s.skillName %></a></span>
+                <span><%= s.percentCompleted %>%</span> 
                 <!-- add route and controller for this! -->
             </div>
         <% }) %>

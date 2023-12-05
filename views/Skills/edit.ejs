@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+    <h1><%= title %></h1>
+
+    <form action="/skills/<%= skill._id %>?_method=PUT" method="POST">
+        <label>
+            Skill Name: <input type="text" name="skillName" value="<%= skill.skillName %>">
+        </label><br>
+        <label>
+            Category: <input type="text" name="category" value="<%= skill.category %>">
+        </label><br>
+        <label>
+            Description: <input type="text" name="description" value="<%= skill.description %>">
+        </label><br>
+        <label>
+            Your Why: <input type="text" name="yourWhy" value="<%= skill.yourWhy %>">
+        </label><br>
+        <label>
+            Priority: 
+            <select name="priority" value="<%= skill.priority %>">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </label><br>
+        <button type="submit">Edit Skill</button>
+    </form>
+
+    <form action="/skills/<%= skill._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete Skill</button>
+    </form>
+
+<%- include('../partials/footer') %>

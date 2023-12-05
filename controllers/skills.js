@@ -4,7 +4,44 @@ module.exports = {
     index,
     new: newSkill,
     create,
-    show
+    show,
+    edit,
+    update,
+    delete: deleteSkill
+}
+
+async function deleteSkill(req, res) {
+    try {
+        const skillId = req.params.id
+        const deletedSkill = await Skill.findOneAndDelete({ _id: skillId})
+        res.redirect('/skills')
+    } catch (err) {
+        console.log('ERROR ~~>', err)
+        res.render('skills/delete', { errorMsg: err.message})
+    }
+}
+
+async function update(req, res) {
+    try {
+        const skillId = req.params.id
+        const updatedSkill = await Skill.findOneAndUpdate(
+            { _id: skillId },
+            { $set: req.body },
+            { new: true }
+        )
+        res.redirect('/skills');
+    } catch (err) {
+        console.log('ERROR ~~>', err)
+        res.render(`/skills/${skill._id}`, { errorMsg: err.message })
+    }
+}
+
+async function edit(req, res) {
+    const skill = await Skill.findById(req.params.id)
+    res.render('skills/edit', {
+        skill,
+        title: 'Edit  Skill'
+    })
 }
 
 async function show(req, res) {

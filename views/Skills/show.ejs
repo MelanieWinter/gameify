@@ -12,6 +12,9 @@
         <div>Priority: <%= skill.priority %></div>
         <div>Percent Completed: <%= skill.percentCompleted %></div>
         <div>Completed: <%= skill.completed %></div>
+        <div><a href="/skills/<%= skill._id %>/edit">Edit Skill</a></div>
     </section>
+
+    
 
 <%- include('../partials/footer') %>
