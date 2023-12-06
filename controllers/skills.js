@@ -1,5 +1,9 @@
 const Skill = require('../models/skill')
 
+const ToDoModels = require('../models/toDo'); 
+const Goal = ToDoModels.Goal;
+const Task = ToDoModels.Task;
+
 module.exports = {
     index,
     new: newSkill,
@@ -45,8 +49,7 @@ async function edit(req, res) {
 }
 
 async function show(req, res) {
-    const skill = await Skill.findById(req.params.id)
-    console.log()
+    const skill = await Skill.findById(req.params.id).populate('goals')
     res.render('skills/show', {
         skill,
         title: 'Skill Details'

@@ -26,6 +26,41 @@
         <button type="submit">Edit Skill</button>
     </form>
 
+    <br><br>
+
+    <form action="/skills/<%= skill._id %>/goals" method="POST">
+        <label>
+            <span>Type: </span>
+            <select name="type">
+                <option value="longTermGoal">Long Term Goal</option>
+                <option value="shortTermGoal">Short Term Goal</option>
+            </select>
+        </label><br>
+        <label>
+            <span>Name: </span>
+            <input type="text" name="name">
+        </label><br>
+        <label>
+            <span>Description: </span>
+            <input type="text" name="description">
+        </label><br>
+        <label>
+            <span>Due Date: </span>
+            <input type="date" name="dueDate">
+        </label><br>
+        <label>
+            <span>Priority: </span>
+            <select name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </label><br>
+        <button type="submit">Add Goal</button>
+    </form>
+
+    <br><br>
+
     <form action="/skills/<%= skill._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete Skill</button>
     </form>

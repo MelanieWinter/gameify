@@ -15,6 +15,15 @@
         <div><a href="/skills/<%= skill._id %>/edit">Edit Skill</a></div>
     </section>
 
-    
+    <section>
+        <h3>Goals</h3>
+        <% skill.goals.forEach(function(g) { %>
+            <div>
+                <div>Type: <%= g.type %></div>
+                <div>Name: <%= g.name %></div>
+            </div>
+        <% }) %>
+        
+    </section>
 
 <%- include('../partials/footer') %>

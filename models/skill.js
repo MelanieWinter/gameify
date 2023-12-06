@@ -28,7 +28,11 @@ skillSchema = new Schema({
         type: Boolean,
         default: false,
         enum: [ true, false ]
-    }
+    },
+    goals: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Goal'
+    }]
 })
 
 module.exports = mongoose.model('Skill', skillSchema);

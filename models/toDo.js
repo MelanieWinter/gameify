@@ -40,4 +40,9 @@ const toDoSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('Goal', 'Task', toDoSchema)
+const Goal = mongoose.model('Goal', toDoSchema);
+module.exports.Goal = Goal;
+
+
+const Task = mongoose.model('Task', toDoSchema);
+module.exports.Task = Task;
