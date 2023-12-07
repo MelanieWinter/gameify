@@ -1,0 +1,69 @@
+<%- include('../partials/header') %>
+
+<% if (user) { %>
+
+    <br><br>
+
+    <h1><%= title %></h1>
+
+    <form action="/tasks" method="POST" id="taskForm">
+        <label>
+            <span>Type: </span>
+            <select name="type" required>
+                <option value="dailyTask">Daily Task</option>
+            </select>
+        </label><br>
+        <label>
+            <span>Skill: </span>
+            <select name="skill" id="skillSelect" required>
+                <option value="" disabled selected>Select the related skill</option>
+                <% skills.forEach(function(skill) { %>
+                    <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                <% }) %>
+            </select>
+        </label><br>
+        <label>
+            <span>Goal: </span>
+            <select name="goal" id="goalSelect" required disabled>
+                <option value="" disabled selected>Select the related goal</option>
+                <% goals.forEach(function(goal) { %>
+                    <option value="<%= goal._id %>"><%= goal.name %></option>
+                <% }) %>
+            </select>
+        </label><br>
+        <label>
+            <span>Name: </span>
+            <input type="text" name="name">
+        </label><br>
+        <label>
+            <span>Description: </span>
+            <input type="text" name="description">
+        </label><br>
+        <label>
+            <span>Priority: </span>
+            <select name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </label><br>
+        
+        <br><br>
+
+        <button type="submit">Add Daily Task</button>
+    </form>
+
+    <script>
+        // Add an event listener to the skill select
+        document.getElementById('skillSelect').addEventListener('change', function() {
+            // Get the selected skill value
+            var selectedSkill = this.value;
+
+            // Enable or disable the goal select based on whether a skill is selected
+            document.getElementById('goalSelect').disabled = !selectedSkill;
+        });
+    </script>
+
+<% } %>
+
+<%- include('../partials/footer') %>

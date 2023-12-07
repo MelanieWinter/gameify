@@ -1,5 +1,9 @@
 <%- include('../partials/header') %>
 
+<% if (user) { %>
+
+    <br><br>
+
     <h1><%= title %></h1>
 
     <div>
@@ -7,12 +11,15 @@
             <div>
                 <span><a href="/skills/<%= s._id %>"><%= s.skillName %></a></span>
                 <span><%= s.percentCompleted %>%</span> 
-                <!-- add route and controller for this! -->
             </div>
         <% }) %>
+
+        <br><br>
         <div>
             <a href="/skills/new">New Skill</a>
         </div>
     </div>
+    
+<% } %>
 
 <%- include('../partials/footer') %>

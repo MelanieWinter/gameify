@@ -1,0 +1,54 @@
+<%- include('../partials/header') %>
+
+<% if (user) { %>
+
+    <br><br>
+
+    <h1><%= title %></h1>
+
+    <section>
+        <div>
+            <span>Goal Name:</span>
+            <span><%= goal.name %></span>
+        </div>  
+        <div>
+            <span>Skill:</span>
+            <span><a href="/skills/<%= goal.skill._id %>"><%= goal.skill.skillName %></a></span>
+        </div> 
+        <div>
+            <span>Type:</span>
+            <span><%= goal.type %></span>
+        </div>  
+        <div>
+            <span>Description:</span>
+            <span><%= goal.description %></span>
+        </div>
+        <div>
+            <span>XP:</span>
+            <span><%= goal.xp %></span>
+        </div>
+        <div>
+            <span>Date Created:</span>
+            <span><%= goal.dateCreated.toLocaleString() %></span>
+        </div>
+        <div>
+            <span>Due Date:</span>
+            <span><%= goal.dueDate.toLocaleString() %></span>
+        </div>
+        <div>
+            <span>Priority:</span>
+            <span><%= goal.priority %></span>
+        </div>
+        <div>
+            <span>Status:</span>
+            <span><%= goal.status %></span>
+        </div>
+    </section>
+
+    <br><br>
+
+    <div><a href="/goals/<%= goal._id %>/edit">Edit Goal</a></div>
+
+<% } %>
+
+<%- include('../partials/footer') %>

@@ -6,9 +6,13 @@ const toDoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Skill'
     },
+    goal: {
+        type: Schema.Types.ObjectId,
+        ref: 'Goal'
+    },
     task: {
         type: Schema.Types.ObjectId,
-        res: 'Task'
+        ref: 'Task'
     },
     type: {
         type: String,
@@ -16,7 +20,7 @@ const toDoSchema = new Schema({
     },
     name: { type: String },
     description: { type: String },
-    xp: { type: Number },
+    xp: { type: Number, default: 500 },
     dateCreated: { 
         type: Date,
         default: Date.now 
@@ -31,12 +35,12 @@ const toDoSchema = new Schema({
     },
     priority: {
         type: String,
-        enum: [ 'high', 'normal', 'low' ]
+        enum: [ 'high', 'medium', 'low' ]
     },
-    completed: {
-        type: Boolean,
-        default: false,
-        enum: [ true, false ]
+    status: {
+        type: String,
+        default: 'In Progress',
+        enum: [ 'In Progress', 'Completed' ]
     }
 })
 

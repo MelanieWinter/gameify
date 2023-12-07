@@ -1,19 +1,20 @@
 <%- include('../partials/header') %>
 
+<% if (user) { %>
+
+    <br><br>
+
     <h1><%= title %></h1>
 
     <form action="/skills" method="POST">
         <label>
-            Skill Name: <input type="text" name="skillName">
+            Skill Name: <input type="text" name="skillName" required>
         </label><br>
         <label>
             Category: <input type="text" name="category">
         </label><br>
         <label>
             Description: <input type="text" name="description">
-        </label><br>
-        <label>
-            Your Why: <input type="text" name="yourWhy">
         </label><br>
         <label>
             Priority: 
@@ -23,7 +24,12 @@
                 <option value="high">High</option>
             </select>
         </label><br>
+
+        <br><br>
+        
         <button type="submit">Add Skill</button>
     </form>
-    
+
+<% } %>
+
 <%- include('../partials/footer') %>

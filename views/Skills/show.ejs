@@ -1,29 +1,53 @@
 <%- include('../partials/header') %>
 
+<% if (user) { %>
+
+    <br><br>
+
     <h1><%= title %></h1>
 
     <section>
         <div>Name: <%= skill.skillName %></div>
         <div>Category: <%= skill.category %></div>
-        <div>Hours To Completion: <%= skill.hoursToCompletion %></div>
         <div>Description: <%= skill.description %></div>
-        <div>Your Why: <%= skill.yourWhy %></div>
         <div>XP: <%= skill.xp %></div>
         <div>Priority: <%= skill.priority %></div>
         <div>Percent Completed: <%= skill.percentCompleted %></div>
-        <div>Completed: <%= skill.completed %></div>
-        <div><a href="/skills/<%= skill._id %>/edit">Edit Skill</a></div>
+        <div>Status: <%= skill.status %></div>
     </section>
+    <div><a href="/skills/<%= skill._id %>/edit">Edit Skill</a></div>
+
+    <br><br>
+
+
 
     <section>
-        <h3>Goals</h3>
-        <% skill.goals.forEach(function(g) { %>
+        <h3>Goals For This Skill</h3>
+        <% goals.forEach(function(g) { %>
             <div>
-                <div>Type: <%= g.type %></div>
-                <div>Name: <%= g.name %></div>
+                <span><a href="/goals/<%= g._id %>"><%= g.name %></a></span>
+                <span> - <%= g.status %></span>
+                <% if (g.status === 'In Progress') { %>
+                    <span> - Complete By: <%= g.dueDate.toLocaleString() %></span>
+                <% } %>
             </div>
         <% }) %>
-        
+        <div><a href="/goals/new">New Goal</a></div>
     </section>
+
+    <br><br>
+
+    <section>
+        <h3>Daily Tasks For This Skill</h3>
+        <% tasks.forEach(function(t) { %>
+            <div>
+                <span><a href="/tasks/<%= t._id %>"><%= t.name %></a></span>
+                <span> - <%= t.status %></span>
+            </div>
+        <% }) %>
+        <div><a href="/tasks/new">New Daily Task</a></div>
+    </section>
+
+<% } %>
 
 <%- include('../partials/footer') %>

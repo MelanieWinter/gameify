@@ -15,6 +15,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const skillsRouter = require('./routes/skills')
 const goalsRouter = require('./routes/goals')
+const tasksRouter = require('./routes/tasks')
 
 var app = express();
 
@@ -46,7 +47,8 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/skills', skillsRouter)
-app.use('/', goalsRouter)
+app.use('/goals', goalsRouter)
+app.use('/tasks', tasksRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -63,5 +65,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
 
 module.exports = app;

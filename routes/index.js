@@ -23,7 +23,7 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    successRedirect: '/', // this will still be '/' but the view will have an if(user)/else statement to show relevant info depending on if signed in or not
+    successRedirect: '/',
     failureRedirect: '/'
   }
 ))

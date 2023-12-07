@@ -1,0 +1,63 @@
+<%- include('../partials/header') %>
+
+<% if (user) { %>
+
+    <br><br>
+
+    <h1><%= title %></h1>
+
+    <form action="/tasks/<%= task._id %>?_method=PUT" method="POST">
+        <label>
+            <span>Skill: </span>
+            <select name="skill" value="<%= task.skill %>" required>
+                <% skills.forEach(function(skill) { %>
+                    <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                <% }) %>
+            </select>
+        </label><br>
+        <label>
+            <span>Goal: </span>
+            <select name="goal" value="<%= task.goal %>" required>
+                <% goals.forEach(function(goal) { %>
+                    <option value="<%= goal._id %>"><%= goal.name %></option>
+                <% }) %>
+            </select>
+        </label><br>
+        <label>
+            <span>Name: </span>
+            <input type="text" name="name" value="<%= task.name %>">
+        </label><br>
+        <label>
+            <span>Description: </span>
+            <input type="text" name="description" value="<%= task.description %>">
+        </label><br>
+        <label>
+            <span>Priority: </span>
+            <select name="priority" value="<%= task.priority %>">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </label><br>
+        <label>
+            <span>Status: </span>
+            <select name="status" value="<%= task.status %>">
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </label>
+        
+        <br><br>
+
+        <button type="submit">Edit Task</button>
+    </form>
+
+    <br><br>
+
+    <form action="/tasks/<%= task._id %>?_method=DELETE" method="POST">
+        <button type="submit" onclick="return confirm('Are you sure you want to delete this DAILY TASK?')">Delete Daily Task</button>
+    </form>
+
+<% } %>
+
+<%- include('../partials/footer') %>

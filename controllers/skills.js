@@ -17,6 +17,8 @@ module.exports = {
 async function deleteSkill(req, res) {
     try {
         const skillId = req.params.id
+        await Goal.deleteMany({ skill: skillId})
+        await Task.deleteMany({ skill: skillId})
         const deletedSkill = await Skill.findOneAndDelete({ _id: skillId})
         res.redirect('/skills')
     } catch (err) {
@@ -49,28 +51,29 @@ async function edit(req, res) {
 }
 
 async function show(req, res) {
-    const skill = await Skill.findById(req.params.id).populate('goals')
+    const skill = await Skill.findById(req.params.id)
+    const goals = await Goal.find({skill: skill._id})
+    const tasks = await Task.find({skill: skill._id})
     res.render('skills/show', {
+        tasks,
+        goals,
         skill,
         title: 'Skill Details'
     })
 }
 
+
 async function create(req, res) {
-    for (let key in req.body) {
-        if (req.body[key] === '') delete req.body[key]
-    }
     try {
-        const skill = await Skill.create(req.body)
-        res.redirect('/skills')
+        await Skill.create(req.body)
     } catch (err) {
         console.log('ERROR ~~>', err)
-        res.render('skills/new', { errorMsg: err.message})
+        res.render('skills/new', { errorMsg: err.message })
     }
+    res.redirect('/skills')
 }
 
 function newSkill(req, res) {
-    const newSkill = new Skill()
     res.render('skills/new', {
         errorMsg: '',
         title: 'New Skill'

@@ -1,0 +1,50 @@
+<%- include('../partials/header') %>
+
+<% if (user) { %>
+
+    <br><br>
+
+    <h1><%= title %></h1>
+
+    <section>
+        <div>
+            <span>Daily Task Name:</span>
+            <span><%= task.name %></span>
+        </div>  
+        <div>
+            <span>Skill:</span>
+            <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
+        </div> 
+        <div>
+            <span>Goal:</span>
+            <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
+        </div>
+        <div>
+            <span>Type:</span>
+            <span><%= task.type %></span>
+        </div>  
+        <div>
+            <span>Description:</span>
+            <span><%= task.description %></span>
+        </div>
+        <div>
+            <span>XP:</span>
+            <span><%= task.xp %></span>
+        </div>
+        <div>
+            <span>Priority:</span>
+            <span><%= task.priority %></span>
+        </div>
+        <div>
+            <span>Status:</span>
+            <span><%= task.status %></span>
+        </div>
+    </section>
+
+    <br><br>
+
+    <div><a href="/tasks/<%= task._id %>/edit">Edit Task</a></div>
+
+<% } %>
+
+<%- include('../partials/footer') %>
