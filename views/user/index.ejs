@@ -94,8 +94,7 @@
                 <% }) %>
             </div>
 
-            <div class="user-data-new-skill">
-
+            <div class="user-data-div new-skill hidden">
                 <form action="" data-multi-step class="multi-step-form" id="taskForm">
                     <div class="card" data-step>
                         <h3 class="step-title">Add New Skill</h3>
@@ -183,7 +182,6 @@
                         <button type="submit">Submit</button>
                     </div>
                 </form>
-
             </div>
 
         </div>
@@ -288,12 +286,12 @@
             }
         })
 
-        formSteps.forEach(step => {
-            step.addEventListener('animationend', e => {
-                formSteps[currentStep].classList.remove('hidden')
-                e.target.classList.toggle('hidden', !e.target.classList.contains('active'))
-            })
-        })
+        // formSteps.forEach(step => {
+        //     step.addEventListener('animationend', e => {
+        //         formSteps[currentStep].classList.remove('hidden')
+        //         e.target.classList.toggle('hidden', !e.target.classList.contains('active'))
+        //     })
+        // })
 
         function showCurrentStep() {
             formSteps.forEach((step, index) => {
