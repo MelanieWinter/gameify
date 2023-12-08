@@ -200,8 +200,8 @@ dialog::backdrop {
   align-items: flex-end;
   height: fit-content;
   width: fit-content;
-  margin-top: 5vmin;
-  margin-left: 5vmin;
+  /* margin-top: 5vmin; */
+  /* margin-left: 5vmin; */
 }
 
 .user-avatar {
@@ -282,7 +282,7 @@ input:checked + .radio-tile {
 .user-info {
   display: flex;
   flex-direction: column;
-  margin-left: 5vmin;
+  /* margin-left: 5vmin; */
   width: 25vmin;
 }
 
@@ -297,16 +297,21 @@ input:checked + .radio-tile {
 main {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  margin: 5vmin 0;
 }
 
 .section-2 {
-  margin-top: 5vmin;
   margin-left: 10vmin;
 }
 
 .user-title {
   font-size: 2.75rem;
   font-weight: 300;
+}
+
+.user-title span {
+  font-weight: 500;
 }
 
 .user-div {
@@ -319,9 +324,11 @@ main {
 
 .user-data-title {
   padding-top: 3vmin;
+  padding-bottom: 2vmin;
   font-size: 2.1rem;
   text-align: center;
   font-weight: 700;
+  text-decoration: underline;
 }
 
 .user-data-div .each-data {
@@ -336,6 +343,111 @@ main {
   text-transform: uppercase;
 }
 
+.user-data-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5vmin;
+  margin: 2vmin 5vmin;
+}
+
+.user-data-nav-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50vmin;
+}
+
+.add-new a {
+  font-weight: 300;
+}
+
+.modal-content {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Show the first step by default */
+.modal-content:first-child {
+  display: block;
+}
+
+/* Style the navigation buttons */
+.step-buttons {
+  overflow: hidden;
+}
+
+.step-buttons button {
+  float: right;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
+}
+
+.user-data-new-skill {
+  padding-top: 8vmin;
+}
+
+.card {
+  background: var(--primary-background);
+  border: 1px solid var(--primary-color);
+  border-radius: .5rem;
+  padding: 3rem;
+  max-width: 50vmin;
+  margin: 0 auto;
+  /* display: none; */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  margin-bottom: .5rem;
+}
+
+.form-group:last-child {
+  margin: 0;
+}
+
+.form-group > label {
+  font-weight: 500;
+  font-size: .8em;
+  color: var(--primary-color);
+}
+
+.form-group > input { 
+  border: 1px solid var(--primary-color);
+  border-radius: .25rem;
+  font-size: 1rem;
+  padding: .25em;
+}
+
+.step-title {
+  margin: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.card.active {
+  /* display: block; */
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.multi-step-form {
+  overflow: hidden;
 }

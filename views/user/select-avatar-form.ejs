@@ -6,3 +6,305 @@
     </form>
 </dialog>
 
+
+const msModal = document.getElementById('multiStepModal');
+        const modalContents = Array.prototype.slice.call(document.querySelectorAll('.modal-content'));
+
+        function openModal() {
+            msModal.showModal();
+            msModal.addEventListener('click', modalClickHandler);
+        }
+
+        function closeModal() {
+            msModal.close();
+        }
+
+        function nextStep(event) {
+            event.stopPropagation();
+            const currentStep = getCurrentStep();
+            const nextStep = currentStep + 1;
+            updateModalContent(nextStep);
+        }
+
+        function prevStep(event) {
+            event.stopPropagation();
+            const currentStep = getCurrentStep();
+            const prevStep = currentStep - 1;
+            updateModalContent(prevStep);
+        }
+
+        function getCurrentStep() {
+            const visibleContent = document.querySelector('.modal-content:not([style*="display: none"])');
+            return parseInt(visibleContent.getAttribute('data-step'));
+        }
+
+        function updateModalContent(step) {
+            modalContents.forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const targetContent = document.querySelector(`.modal-content[data-step="${step}"]`);
+            targetContent.style.display = 'block';
+        }
+
+        function submitForm(event, method) {
+            event.preventDefault();
+            
+            const currentStep = getCurrentStep();
+            const form = document.querySelector(`.modal-content[data-step="${currentStep}"] form`);
+            
+            // Set the action and method dynamically based on the current step
+            switch (currentStep) {
+                case 1:
+                    form.action = '/skills';
+                    form.method = 'POST';
+                    break;
+                case 2:
+                    form.action = '/goals';
+                    form.method = 'POST';
+                    break;
+                case 3:
+                    form.action = '/tasks';
+                    form.method = 'POST';
+                    break;
+                // Add more cases as needed for additional steps
+            }
+
+            // You can access form data using FormData or serialize the form data as needed
+            const formData = new FormData(form);
+
+            // You can perform POST or PUT request here using fetch or other methods
+            console.log(`${form.method} request with data:`, formData);
+
+            // Close the modal after submission (you may want to add error handling here)
+            closeModal();
+        }
+
+        function modalClickHandler(e) {
+            const dialogDimensions = msModal.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                msModal.close();
+                // Remove the event listener after the modal is closed
+                msModal.removeEventListener('click', modalClickHandler);
+            }
+        }
+
+        <dialog data-modal id="multiStepModal">
+
+            <div class="modal-content" data-step="1">
+                <h2>Add New Skill</h2>
+                <form onsubmit="return false;">
+                    <label>
+                        Skill Name: <input type="text" name="skillName" required>
+                    </label><br>
+                    <label>
+                        Category: <input type="text" name="category">
+                    </label><br>
+                    <label>
+                        Description: <input type="text" name="description">
+                    </label><br>
+                    <label>
+                        Priority: 
+                        <select name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </label><br>
+                    <div class="step-buttons">
+                        <button type="button" onclick="nextStep(); submitForm(event, 'POST')">Next</button>
+                    </div>
+                </form>
+            </div>
+    
+            <div class="modal-content" data-step="2">
+                <form onsubmit="return false;">
+                    <label>
+                        <span>Type: </span>
+                        <select name="type">
+                            <option value="longTermGoal">Long Term Goal</option>
+                            <option value="shortTermGoal">Short Term Goal</option>
+                        </select>
+                    </label><br>
+                    <label>
+                        <span>Skill: </span>
+                        <select name="skill" required>
+                            <option value="" disabled selected>Select a skill</option>
+                            <% skills.forEach(function(skill) { %>
+                                <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                            <% }) %>
+                        </select>
+                    </label><br>
+                    <label>
+                        <span>Name: </span>
+                        <input type="text" name="name">
+                    </label><br>
+                    <label>
+                        <span>Description: </span>
+                        <input type="text" name="description">
+                    </label><br>
+                    <label>
+                        <span>Due Date: </span>
+                        <input type="datetime-local" name="dueDate">
+                    </label><br>
+                    <label>
+                        <span>Priority: </span>
+                        <select name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </label><br>
+                    <div class="step-buttons">
+                        <button type="button" onclick="prevStep()">Previous</button>
+                        <button type="button" onclick="nextStep(); submitForm(event, 'POST')">Next</button>
+                    </div>
+                </form>
+            </div>
+    
+            <div class="modal-content" data-step="3">
+                <form onsubmit="return false;" id="taskForm">
+                    <label>
+                        <span>Type: </span>
+                        <select name="type" required>
+                            <option value="dailyTask">Daily Task</option>
+                        </select>
+                    </label><br>
+                    <label>
+                        <span>Skill: </span>
+                        <select name="skill" id="skillSelect" required>
+                            <option value="" disabled selected>Select the related skill</option>
+                            <% skills.forEach(function(skill) { %>
+                                <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                            <% }) %>
+                        </select>
+                    </label><br>
+                    <label>
+                        <span>Goal: </span>
+                        <select name="goal" id="goalSelect" required disabled>
+                            <option value="" disabled selected>Select the related goal</option>
+                            <% goals.forEach(function(goal) { %>
+                                <option value="<%= goal._id %>" data-skill="<%= goal.skill %>"><%= goal.name %></option>
+                            <% }) %>
+                        </select>
+                    </label><br>
+                    
+                    <label>
+                        <span>Name: </span>
+                        <input type="text" name="name">
+                    </label><br>
+                    <label>
+                        <span>Description: </span>
+                        <input type="text" name="description">
+                    </label><br>
+                    <label>
+                        <span>Priority: </span>
+                        <select name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </label><br>
+                    <div class="step-buttons">
+                        <button type="button" onclick="prevStep()">Previous</button>
+                        <button type="button" onclick="submitForm(event, 'POST')">Submit</button>
+                    </div>
+                </form>
+            </div>
+    
+        </dialog>
+
+
+
+
+
+        <div class="user-data-new-skill">
+
+            <form action="" data-multi-step id="taskForm">
+                <div class="card" data-step="1">
+                    <div class="form-group">
+                        <label for="skill-name">Skill Name</label>
+                        <input type="text" name="skillName" id="skill-name" required>
+                        <label for="skill-category">Category</label>
+                        <input type="text" name="category" id="skill-category">
+                        <label for="skill-description">Description</label>
+                        <input type="text" name="description" id="skill-description">
+                        <label for="skill-priority">Priority</label> 
+                            <select name="priority" id="skill-priority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="card" data-step="2">
+                    <div class="form-group">
+                        <label for="goal-type">Type</label>
+                            <select name="type" id="goal-type">
+                                <option value="longTermGoal">Long Term Goal</option>
+                                <option value="shortTermGoal">Short Term Goal</option>
+                            </select>
+                        <label for="goal-skill">Skill</label>
+                            <select name="skill" id="goal-skill" required>
+                                <option value="" disabled selected>Select a skill</option>
+                                <% skills.forEach(function(skill) { %>
+                                    <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                                <% }) %>
+                            </select>
+                        <label for="goal-name">Name</label>
+                            <input type="text" name="name" id="goal-name">
+                        <label for="goal-description">Description</label>
+                            <input type="text" name="description" id="goal-description">
+                        <label for="goal-due-date">Due Date</label>
+                            <input type="datetime-local" name="dueDate" id="goal-due-date">
+                        <label for="goal-priority">Priority</label>
+                            <select name="priority" id="goal-priority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="card" data-step="3">
+                    <div class="form-group">
+                        <label for="task-type">Type</label>
+                            <select name="type" id="task-type" required>
+                                <option value="dailyTask">Daily Task</option>
+                            </select>
+                        <label for="task-skill">Skill</label>
+                            <select name="skill" id="skillSelect task-skill" required>
+                                <option value="" disabled selected>Select the related skill</option>
+                                <% skills.forEach(function(skill) { %>
+                                    <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                                <% }) %>
+                            </select>
+                        <label for="task-goal">Goal</label>
+                            <select name="goal" id="goalSelect task-goal" required disabled>
+                                <option value="" disabled selected>Select the related goal</option>
+                                <% goals.forEach(function(goal) { %>
+                                    <option value="<%= goal._id %>" data-skill="<%= goal.skill %>"><%= goal.name %></option>
+                                <% }) %>
+                            </select>
+                        <label for="task-name">Name</label>
+                            <input type="text" name="name" id="task-name">
+                        <label for="task-description">Description</label>
+                            <input type="text" name="description" id="task-description">
+                        <label for="task-priority">Priority</label>
+                            <select name="priority" id="task-priority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                    </div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+
+        </div>
