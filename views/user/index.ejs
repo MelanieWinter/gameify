@@ -25,33 +25,18 @@
         <form action="/user/<%= user._id %>?_method=PUT" method="POST">
             <div class="radio-container">
                 <div class="radio-tile-group">
-                    <div class="input-container">
-                        <input id="avatar1" type="radio" name="radio" value="/images/avatars/1.png">
-                        <div class="radio-tile">
-                            <img src="/images/avatars/1.png">
-                        </div>
+
+                    <div class="radio-tile-group">
+                        <% for (let i = 1; i <= 50; i++) { %>
+                            <div class="input-container">
+                                <input id="avatar<%= i %>" type="radio" name="radio" value="/images/avatars/<%= i %>.png">
+                                <div class="radio-tile">
+                                    <img src="/images/avatars/<%= i %>.png">
+                                </div>
+                            </div>
+                        <% } %>
                     </div>
-        
-                    <div class="input-container">
-                        <input id="avatar2" type="radio" name="radio" value="/images/avatars/2.png">
-                        <div class="radio-tile">
-                            <img src="/images/avatars/2.png">
-                        </div>
-                    </div>
-        
-                    <div class="input-container">
-                        <input id="avatar3" type="radio" name="radio" value="/images/avatars/3.png">
-                        <div class="radio-tile">
-                            <img src="/images/avatars/3.png">
-                        </div>
-                    </div>
-        
-                    <div class="input-container">
-                        <input id="avatar4" type="radio" name="radio" value="/images/avatars/4.png">
-                        <div class="radio-tile">
-                            <img src="/images/avatars/4.png">
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <button type="submit" formmethod="dialog">Cancel</button>
@@ -64,16 +49,48 @@
             Hey <%= user.name %>, 
             <br>what are you working on today?
         </div>
-        <div class="user-data-div">
+        <div class="user-div">
 
-            <div class="user-skills-div">
-                    <div class="skills-title">Skills</div>
+            <div class="user-data-div hidden" id="user-skills">
+                    <div class="user-data-title">Skills</div>
                     <% skills.forEach(function(s) { %>
-                        <div class="each-skill">
-                            <span><a href="/skills/<%= s._id %>"><%= s.skillName %></a></span>
+                        <div class="each-data">
+                            <span><a href="/skills/<%= s._id %>" class="each-data-a"><%= s.skillName %></a></span>
                             <span><%= s.percentCompleted %>%</span> 
                         </div>
                     <% }) %>
+            </div>
+
+            <div class="user-data-div hidden" id="user-goals">
+                <div class="user-data-title">Goals</div>
+                <% goals.forEach(function(g) { %>
+                    <div class="each-data">
+                        <span><a href="/goals/<%= g._id %>" class="each-data-a"><%= g.name %></a></span>
+                        <% if (g.skill) { %>
+                            <span> - (<a href="/skills/<%= g.skill._id %>" class="each-data-a"><%= g.skill.skillName %></a>)</span>
+                        <% } %>
+                        <span> - <%= g.status %></span>
+                        <% if (g.status === 'In Progress') { %>
+                            <span> - Complete By: <%= g.dueDate.toLocaleDateString() %></span>
+                        <% } %>
+                    </div>
+                <% }) %>
+            </div>
+
+            <div class="user-data-div" id="user-tasks">
+                <div class="user-data-title">Daily Tasks</div>
+                <% tasks.forEach(function(t) { %>
+                    <div class="each-data">
+                        <span><a href="/tasks/<%= t._id %>" class="each-data-a"><%= t.name %></a></span>
+                        <% if (t.skill) { %>
+                            <span> - (<a href="/skills/<%= t.skill._id %>" class="each-data-a"><%= t.skill.skillName %></a>)</span>
+                        <% } %>
+                        <% if (t.goal) { %>
+                            <span> - (<a href="/goals/<%= t.goal._id %>" class="each-data-a"><%= t.goal.name %></a>)</span>
+                        <% } %>
+                        <span> - <%= t.status %></span>
+                    </div>
+                <% }) %>
             </div>
 
         </div>

@@ -17,8 +17,14 @@ body {
 }
 
 a {
-  text-decoration: none;
-  color: #362342;
+  text-decoration: none; 
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+a:hover {
+  transform: scale(0.95);
+  transition: transform 25ms ease-in;
 }
 
 .wrapper {
@@ -143,22 +149,11 @@ a {
   width: 100vmin;
   margin-top: 2px;
   font-size: 1.2rem;
-}
-
-.nav-links > a:hover {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .log {
-  border: 1px transparent var(--primary-color);
-  border-radius: 10px;
-  background: var(--translucent-primary-color);
-  padding: .5px 10px;
-  color: white;
-}
-
-.log:hover {
-  color: var(--translucent-primary-color);
+  font-weight: 300;
 }
 
 .modal {
@@ -180,20 +175,6 @@ a {
   border: 1px solid #888;
   width: 80%;
 }
-
-/* .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-} */
-
-/* .close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-} */
 
 dialog {
   position: fixed;
@@ -243,6 +224,8 @@ dialog::backdrop {
 
 .avatar-selector-button:hover {
   cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 25ms ease-in;
 }
 
 .radio-container {
@@ -292,7 +275,7 @@ dialog::backdrop {
 }
 
 input:checked + .radio-tile {
-  background-color: var(--translucent-primary-color);
+  background-color: var(--primary-color);
   box-shadow: 0 0 12px var(--primary-color);
 }
 
@@ -326,7 +309,7 @@ main {
   font-weight: 300;
 }
 
-.user-data-div {
+.user-div {
   margin-top: 5vmin;
   height: 60vh;
   width: 60vw;
@@ -334,20 +317,25 @@ main {
   backdrop-filter: blur(.5rem);
 }
 
-.user-skills-div .skills-title {
+.user-data-title {
   padding-top: 3vmin;
   font-size: 2.1rem;
   text-align: center;
   font-weight: 700;
 }
 
-.user-skills-div .each-skill {
+.user-data-div .each-data {
   margin: .5vmin 5vmin;
+  padding-bottom: .5vmin;
   font-size: 1.25rem;
   font-weight: 300;
   border-bottom: 1px solid var(--translucent-primary-color);
 }
 
-a:hover {
-  font-weight: 700;
+.each-data-a {
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
 }
