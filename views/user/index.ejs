@@ -288,6 +288,13 @@
             }
         })
 
+        formSteps.forEach(step => {
+            step.addEventListener('animationend', e => {
+                formSteps[currentStep].classList.remove('hidden')
+                e.target.classList.toggle('hidden', !e.target.classList.contains('active'))
+            })
+        })
+
         function showCurrentStep() {
             formSteps.forEach((step, index) => {
                 step.classList.toggle('active', index === currentStep)

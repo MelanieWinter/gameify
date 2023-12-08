@@ -393,10 +393,6 @@ main {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
-}
-
 .user-data-new-skill {
   padding-top: 8vmin;
 }
@@ -408,7 +404,7 @@ main {
   padding: 3rem;
   max-width: 50vmin;
   margin: 0 auto;
-  /* display: none; */
+  animation: fade 250ms ease-in-out forwards;
 }
 
 .form-group {
@@ -430,7 +426,7 @@ main {
 
 .form-group > input { 
   border: 1px solid var(--primary-color);
-  border-radius: .25rem;
+  border-radius: .25em;
   font-size: 1rem;
   padding: .25em;
 }
@@ -443,11 +439,40 @@ main {
 }
 
 .card.active {
-  /* display: block; */
-  transform: translateX(0);
-  opacity: 1;
+  animation: slide 250ms 125ms ease-in-out both;
 }
 
 .multi-step-form {
   overflow: hidden;
+  position: relative;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(.75);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
