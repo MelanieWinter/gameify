@@ -27,10 +27,11 @@
             <select name="goal" id="goalSelect" required disabled>
                 <option value="" disabled selected>Select the related goal</option>
                 <% goals.forEach(function(goal) { %>
-                    <option value="<%= goal._id %>"><%= goal.name %></option>
+                    <option value="<%= goal._id %>" data-skill="<%= goal.skill %>"><%= goal.name %></option>
                 <% }) %>
             </select>
         </label><br>
+        
         <label>
             <span>Name: </span>
             <input type="text" name="name">
@@ -54,16 +55,20 @@
     </form>
 
     <script>
-        // Add an event listener to the skill select
         document.getElementById('skillSelect').addEventListener('change', function() {
-            // Get the selected skill value
-            var selectedSkill = this.value;
-
-            // Enable or disable the goal select based on whether a skill is selected
-            document.getElementById('goalSelect').disabled = !selectedSkill;
-        });
+            let selectedSkill = this.value
+            let goalSelect = document.getElementById('goalSelect')
+            goalSelect.disabled = !selectedSkill
+            if (selectedSkill) {
+                let goals = document.querySelectorAll('#goalSelect option')
+                goals.forEach(function(goal) {
+                    goal.disabled = (goal.value && goal.getAttribute('data-skill') !== selectedSkill)
+                })
+                goalSelect.value = ''
+            }
+        })
     </script>
-
+    
 <% } %>
 
 <%- include('../partials/footer') %>

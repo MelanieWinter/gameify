@@ -9,21 +9,25 @@
     </head>
 
     <body>
-        <header>   
-            <a href="/"><img src="/images/logo.png" alt="" class="logo"></a>
-            <nav>
-                <a href="/">Home</a>
-                &nbsp;|&nbsp;
-                <% if (user) { %>
-                    <a href="/skills">Skills</a>
-                    &nbsp;|&nbsp;
-                    <a href="/goals">Goals</a>
-                    &nbsp;|&nbsp;
-                    <a href="/tasks">Daily Tasks</a>
-                    &nbsp;|&nbsp;
-                    <a href="/logout">Log Out</a>
-                <% } else { %>
-                    <a href="/auth/google" class="login">Log In</a>
-                <% } %>
+        <header class="header-nav">   
+            
+            <nav class="nav">
+                <div class="nav-logo">
+                    <a href="/">Gamify</a>
+                </div>
+                <div class="nav-links">
+                    <% if (user) { %>
+                        <a href="/">Home</a>
+                        <a href="/user">Account</a>
+                        <a href="/skills">Skills</a>
+                        <a href="/goals">Goals</a>
+                        <a href="/tasks">Daily Tasks</a>
+                        <a href="/logout" class="log">Log Out</a>
+                    <% } else { %>
+                        <a href="/auth/google" class="log">Log In</a>
+                    <% } %>
+                </div>
             </nav>
+                
+
         </header>

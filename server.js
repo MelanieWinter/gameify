@@ -11,8 +11,8 @@ require('dotenv').config()
 require('./config/database')
 require('./config/passport')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
 const skillsRouter = require('./routes/skills')
 const goalsRouter = require('./routes/goals')
 const tasksRouter = require('./routes/tasks')
@@ -45,7 +45,7 @@ app.use(function(req, res, next) {
 })
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/skills', skillsRouter)
 app.use('/goals', goalsRouter)
 app.use('/tasks', tasksRouter)
