@@ -49,10 +49,10 @@
             <br>what are you working on today?
         </div>
         <div class="user-div">
-            <div class="user-data-div hidden" id="user-profile"> 
+            <div class="user-data-div udd hidden" id="user-profile"> 
                 <h1>PROFILE</h1>
             </div>
-            <div class="user-data-div hidden" id="user-skills">
+            <div class="user-data-div udd hidden" id="user-skills">
                     <div class="user-data-title">Skills</div>
                     <% skills.forEach(function(s) { %>
                         <div class="each-data">
@@ -62,7 +62,7 @@
                     <% }) %>
             </div>
 
-            <div class="user-data-div hidden" id="user-goals">
+            <div class="user-data-div udd hidden" id="user-goals">
                 <div class="user-data-title">Goals</div>
                 <% goals.forEach(function(g) { %>
                     <div class="each-data">
@@ -78,7 +78,7 @@
                 <% }) %>
             </div>
 
-            <div class="user-data-div hidden" id="user-tasks">
+            <div class="user-data-div udd hidden" id="user-tasks">
                 <div class="user-data-title">Daily Tasks</div>
                 <% tasks.forEach(function(t) { %>
                     <div class="each-data">
@@ -93,97 +93,6 @@
                     </div>
                 <% }) %>
             </div>
-
-            <div class="user-data-div new-skill hidden">
-                <form action="" data-multi-step class="multi-step-form" id="taskForm">
-                    <div class="card" data-step>
-                        <h3 class="step-title">Add New Skill</h3>
-                        <div class="form-group">
-                            <label for="skill-name">Skill Name</label>
-                                <input type="text" name="skillName" id="skill-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="skill-category">Category</label>
-                                <input type="text" name="category" id="skill-category">
-                        </div>
-                        <div class="form-group">
-                            <label for="skill-description">Description</label>
-                                <input type="text" name="description" id="skill-description">
-                        </div>
-                        <div class="form-group">
-                            <label for="skill-priority">Priority</label> 
-                                <select name="priority" id="skill-priority">
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                        </div>  
-                        <button type="button" data-next>Next</button>
-                    </div>
-
-                    <div class="card" data-step>
-                        <div class="form-group">
-                            <h3 class="step-title">Add Goals To Skill</h3>
-                            <label for="goal-type">Type</label>
-                                <select name="type" id="goal-type">
-                                    <option value="longTermGoal">Long Term Goal</option>
-                                    <option value="shortTermGoal">Short Term Goal</option>
-                                </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="goal-name">Name</label>
-                                <input type="text" name="name" id="goal-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="goal-description">Description</label>
-                                <input type="text" name="description" id="goal-description">
-                        </div>
-                        <div class="form-group">
-                            <label for="goal-due-date">Due Date</label>
-                                <input type="datetime-local" name="dueDate" id="goal-due-date">
-                        </div>
-                        <div class="form-group">
-                            <label for="goal-priority">Priority</label>
-                                <select name="priority" id="goal-priority">
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                        </div>
-                        <button type="button" data-previous>Previous</button>
-                        <button type="button" data-next>Next</button>
-                    </div>
-
-                    <div class="card" data-step>
-                        <h3 class="step-title">Add Tasks To Skill</h3>
-                        <div class="form-group">
-                            <label for="task-type">Type</label>
-                                <select name="type" id="task-type" required>
-                                    <option value="dailyTask">Daily Task</option>
-                                </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="task-name">Name</label>
-                                <input type="text" name="name" id="task-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="task-description">Description</label>
-                                <input type="text" name="description" id="task-description">
-                        </div>
-                        <div class="form-group">
-                            <label for="task-priority">Priority</label>
-                                <select name="priority" id="task-priority">
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                        </div>
-                        <button type="button" data-previous>Previous</button>
-                        <button type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-
         </div>
         <div class="user-data-nav">
             <div class="user-data-nav-div">
@@ -202,7 +111,6 @@
 </main>
     <script>
         const openButton = document.querySelector('[data-open-modal]')
-        const closeButton = document.querySelector('[data-close-modal]')
         const modal = document.querySelector('[data-modal]')
 
         openButton.addEventListener('click', () => {
@@ -236,8 +144,8 @@
             addNewDiv.classList.remove('hidden')
             switch (sectionId) {
                 case 'user-skills':
-                    addNewLink.href = '/skills/new'
-                    addNewLink.textContent = 'Add New Skill'
+                    addNewLink.href = '/skills/new';
+                    addNewLink.textContent = 'Add New Skill';
                     break
                 case 'user-goals':
                     addNewLink.href = '/goals/new'
@@ -256,47 +164,6 @@
 
             const selectedSection = document.getElementById(sectionId)
             selectedSection.classList.remove('hidden')
-        }
-
-        const multiStepForm = document.querySelector('[data-multi-step]')
-        const formSteps = [...multiStepForm.querySelectorAll('[data-step]')]
-        let currentStep = formSteps.findIndex(step => {
-            return step.classList.contains('active')
-        })
-        
-        if (currentStep < 0) {
-            currentStep = 0
-            showCurrentStep()
-        }
-
-        multiStepForm.addEventListener('click', e => {
-            let incrementor
-            if (e.target.matches('[data-next]')) {
-                incrementor = 1
-            } else if (e.target.matches('[data-previous]')) {
-                incrementor = -1
-            } 
-
-            if (incrementor == null) return
-            const inputs = [...formSteps[currentStep].querySelectorAll('input')]
-            const allValid = inputs.every(input => input.reportValidity())
-            if (allValid) {
-                currentStep += incrementor
-                showCurrentStep()
-            }
-        })
-
-        // formSteps.forEach(step => {
-        //     step.addEventListener('animationend', e => {
-        //         formSteps[currentStep].classList.remove('hidden')
-        //         e.target.classList.toggle('hidden', !e.target.classList.contains('active'))
-        //     })
-        // })
-
-        function showCurrentStep() {
-            formSteps.forEach((step, index) => {
-                step.classList.toggle('active', index === currentStep)
-            })
         }
 
     </script>

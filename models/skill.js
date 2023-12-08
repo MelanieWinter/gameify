@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 skillSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     skillName: { type: String, required: true },
     category: { type: String },
     description: { type: String },

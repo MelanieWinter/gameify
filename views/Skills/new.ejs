@@ -2,34 +2,62 @@
 
 <% if (user) { %>
 
-    <br><br>
+    <dialog data-modal id="newSkillModal" class="new-skill-modal">
+        <form action="/skills" method="POST">
+            <h3 class="step-title">Add New Skill</h3>
+            <div class="form-group">
+                <label for="skill-name">Skill Name</label>
+                    <input type="text" name="skillName" id="skill-name">
+            </div>
+            <div class="form-group">
+                <label for="skill-category">Category</label>
+                    <input type="text" name="category" id="skill-category">
+            </div>
+            <div class="form-group">
+                <label for="skill-description">Description</label>
+                    <input type="text" name="description" id="skill-description">
+            </div>
+            <div class="form-group">
+                <label for="skill-priority">Priority</label> 
+                    <select name="priority" id="skill-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+            </div>  
+            <button type="button" onclick="goBack()">Cancel</button>
+            <button type="submit" name="action" value="submitSkill">Submit</button>
+        </form>
+    </dialog>
 
-    <h1><%= title %></h1>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.querySelector('[data-modal]')
+        modal.showModal()
+    })
 
-    <form action="/skills" method="POST">
-        <label>
-            Skill Name: <input type="text" name="skillName" required>
-        </label><br>
-        <label>
-            Category: <input type="text" name="category">
-        </label><br>
-        <label>
-            Description: <input type="text" name="description">
-        </label><br>
-        <label>
-            Priority: 
-            <select name="priority">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        </label><br>
+    const modal = document.querySelector('[data-modal]')
 
-        <br><br>
-        
-        <button type="submit">Add Skill</button>
-    </form>
+    function goBack() {
+        window.history.back()
+    }
+
+    modal.addEventListener('click', e => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            goBack()
+        }
+    })
+
+</script>
 
 <% } %>
+
+
 
 <%- include('../partials/footer') %>

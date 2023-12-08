@@ -1,5 +1,5 @@
+const User = require('../models/user')
 const Skill = require('../models/skill')
-
 const ToDoModels = require('../models/toDo'); 
 const Goal = ToDoModels.Goal;
 const Task = ToDoModels.Task;
@@ -24,7 +24,10 @@ async function deleteTask(req, res) {
     }
 }
 
+
 async function update(req, res) {
+    const task = await Task.findById(req.params.id)
+    const user = req.user
     try {
         const taskId = req.params.id
         const updatedTask = await Task.findOneAndUpdate(
@@ -32,11 +35,16 @@ async function update(req, res) {
             { $set: req.body },
             { new: true }
         )
+        if (task.status === 'completed') {
+            user.xp += task.xp
+        }
         res.redirect(`/tasks/${taskId}`);
     } catch (err) {
         console.log('ERROR ~~>', err)
     }
 }
+
+
 
 async function edit(req, res) {
     const task = await Task.findById(req.params.id).populate('skill goal')
@@ -73,9 +81,11 @@ async function create(req, res) {
 
 async function newTask(req, res) {
     try {
+        const user = req.user
         const skills = await Skill.find({})
         const goals = await Goal.find({})
         res.render('tasks/new', {
+            user,
             goals,
             skills,
             title: 'Add New Daily Task'

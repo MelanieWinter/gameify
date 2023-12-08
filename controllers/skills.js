@@ -1,5 +1,5 @@
+const User = require('../models/user')
 const Skill = require('../models/skill')
-
 const ToDoModels = require('../models/toDo'); 
 const Goal = ToDoModels.Goal;
 const Task = ToDoModels.Task;
@@ -73,16 +73,23 @@ async function create(req, res) {
     res.redirect('/skills')
 }
 
-function newSkill(req, res) {
+async function newSkill(req, res) {
+
+
     res.render('skills/new', {
+
         errorMsg: '',
         title: 'New Skill'
     })
 }
 
 async function index(req, res) {
+    // const user = await User.findById(req.params.id)
+    // const skills = await Skill.find({ user: user._id })
     const skills = await Skill.find({})
+    // console.log(user)
     res.render('skills/index', {
+        // user,
         skills, 
         title: 'All Skills'
     })

@@ -1,8 +1,8 @@
+const User = require('../models/user')
 const Skill = require('../models/skill')
-
-const ToDoModels = require('../models/toDo'); 
-const Goal = ToDoModels.Goal;
-const Task = ToDoModels.Task;
+const ToDoModels = require('../models/toDo');
+const Goal = ToDoModels.Goal
+const Task = ToDoModels.Task
 
 module.exports = {
     create,
@@ -61,8 +61,10 @@ async function show(req, res) {
 
 async function newGoal(req, res) {
     try {
+        const user = req.user
         const skills = await Skill.find({})
         res.render('goals/new', {
+            user,
             skills,
             title: 'Add New Goal'
         });

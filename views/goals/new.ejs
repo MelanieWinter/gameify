@@ -2,52 +2,74 @@
 
 <% if (user) { %>
 
-    <br><br>
+    <dialog data-modal id="newGoalModal" class="new-goal-modal">
+        <form action="/goals" method="POST">
+            <h3 class="step-title">Add A Goal</h3>
+            <div class="form-group">
+                <label for="goal-type">Type</label>
+                    <select name="type" id="goal-type">
+                        <option value="longTermGoal">Long Term Goal</option>
+                        <option value="shortTermGoal">Short Term Goal</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="goal-skill">Skill</label>
+                    <select name="skill" id="goal-skill" required>
+                        <option value="" disabled selected>Select a skill</option>
+                        <% skills.forEach(function(skill) { %>
+                            <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                        <% }) %>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="goal-name">Name</label>
+                    <input type="text" name="name" id="goal-name" required>
+            </div>
+            <div class="form-group">
+                <label for="goal-description">Description</label>
+                    <input type="text" name="description" id="goal-description">
+            </div>
+            <div class="form-group">
+                <label for="goal-due-date">Due Date</label>
+                    <input type="datetime-local" name="dueDate" id="goal-due-date">
+            </div>
+            <div class="form-group">
+                <label for="goal-priority">Priority</label>
+                    <select name="priority" id="goal-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+            </div> 
+            <button type="submit" onclick="goBack()">Cancel</button>
+            <button type="submit" name="action" value="submitGoal">Submit</button>
+        </form>
+    </dialog>
 
-    <h1><%= title %></h1>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.querySelector('[data-modal]')
+        modal.showModal()
+    })
 
-    <form action="/goals" method="POST">
-        <label>
-            <span>Type: </span>
-            <select name="type">
-                <option value="longTermGoal">Long Term Goal</option>
-                <option value="shortTermGoal">Short Term Goal</option>
-            </select>
-        </label><br>
-        <label>
-            <span>Skill: </span>
-            <select name="skill" required>
-                <option value="" disabled selected>Select a skill</option>
-                <% skills.forEach(function(skill) { %>
-                    <option value="<%= skill._id %>"><%= skill.skillName %></option>
-                <% }) %>
-            </select>
-        </label><br>
-        <label>
-            <span>Name: </span>
-            <input type="text" name="name">
-        </label><br>
-        <label>
-            <span>Description: </span>
-            <input type="text" name="description">
-        </label><br>
-        <label>
-            <span>Due Date: </span>
-            <input type="datetime-local" name="dueDate">
-        </label><br>
-        <label>
-            <span>Priority: </span>
-            <select name="priority">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        </label><br>
-        
-        <br><br>
+    const modal = document.querySelector('[data-modal]')
 
-        <button type="submit">Add Goal</button>
-    </form>
+    function goBack() {
+        window.history.back()
+    }
+
+    modal.addEventListener('click', e => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            goBack()
+        }
+    })
+</script>
 
 <% } %>
 

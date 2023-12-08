@@ -13,7 +13,10 @@
 body {
   font-family: 'Jura', sans-serif;
   color: #362342;
-  background-image: url("/images/background/layers/clouds_1.png"), url("/images/background/layers/clouds_4.png"), url("/images/background/layers/sky.png");
+  background-image: 
+    url("/images/background/layers/clouds_1.png"), 
+    url("/images/background/layers/clouds_4.png"), 
+    url("/images/background/layers/sky.png");
 }
 
 a {
@@ -169,12 +172,12 @@ a:hover {
   padding-top: 60px;
 }
 
-.modal-content {
+/* .modal-content {
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-}
+} */
 
 dialog {
   position: fixed;
@@ -282,7 +285,6 @@ input:checked + .radio-tile {
 .user-info {
   display: flex;
   flex-direction: column;
-  /* margin-left: 5vmin; */
   width: 25vmin;
 }
 
@@ -320,6 +322,15 @@ main {
   width: 60vw;
   background: var(--primary-background);
   backdrop-filter: blur(.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.udd {
+  height: 60vh;
+  width: 60vw;
 }
 
 .user-data-title {
@@ -372,12 +383,10 @@ main {
   margin: auto;
 }
 
-/* Show the first step by default */
 .modal-content:first-child {
   display: block;
 }
 
-/* Style the navigation buttons */
 .step-buttons {
   overflow: hidden;
 }
@@ -393,20 +402,13 @@ main {
   cursor: pointer;
 }
 
-.user-data-div .new-skill {
-  padding-top: 8vmin;
-}
-
 .card {
   background: var(--primary-background);
   border: 1px solid var(--primary-color);
   border-radius: .5rem;
-  padding: 3rem;
-  max-width: 50vmin;
-  margin: 0 auto;
-  /* animation: fade 250ms ease-in-out forwards; */
+  padding: 1.5rem;
+  width: 50vmin;
   display: none; 
-  /* no animation */
 }
 
 .form-group {
@@ -442,8 +444,6 @@ main {
 
 .card.active {
   display: block;
-  /* no animation */
-  /* animation: slide 250ms 125ms ease-in-out both; */
 }
 
 .multi-step-form {
@@ -454,29 +454,3 @@ main {
 .hidden {
   display: none !important;
 }
-
-/* @keyframes slide {
-  0% {
-    transform: translateX(200%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fade {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(.75);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
-} */

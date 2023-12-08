@@ -2,73 +2,91 @@
 
 <% if (user) { %>
 
-    <br><br>
+    <dialog data-modal id="newTaskModal" class="new-task-modal">
+        <form action="/tasks" method="POST">
+            <div class="form-group">
+                <label for="task-type">Type</label>
+                    <select name="type" id="task-type" required>
+                        <option value="dailyTask">Daily Task</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="task-skill">Skill</label>
+                    <select name="skill" id="skillSelect" required>
+                        <option value="" disabled selected>Select the related skill</option>
+                        <% skills.forEach(function(skill) { %>
+                            <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                        <% }) %>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="task-goal">Goal</label>
+                    <select name="goal" id="goalSelect" required disabled>
+                        <option value="" disabled selected>Select the related goal</option>
+                        <% goals.forEach(function(goal) { %>
+                            <option value="<%= goal._id %>" data-skill="<%= goal.skill %>"><%= goal.name %></option>
+                        <% }) %>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="task-name">Name</label>
+                    <input type="text" name="name" id="task-name" required>
+            </div>
+            <div class="form-group">
+                <label for="task-description">Description</label>
+                    <input type="text" name="description" id="task-description">
+            </div>
+            <div class="form-group">
+                <label for="task-priority">Priority</label>
+                    <select name="priority" id="task-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+            </div>
+            <button type="submit" onclick="goBack()">Cancel</button>
+            <button type="submit" name="action" value="submitGoal">Submit</button>
+        </form>
+    </dialog>
 
-    <h1><%= title %></h1>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.querySelector('[data-modal]')
+        modal.showModal()
+    })
 
-    <form action="/tasks" method="POST" id="taskForm">
-        <label>
-            <span>Type: </span>
-            <select name="type" required>
-                <option value="dailyTask">Daily Task</option>
-            </select>
-        </label><br>
-        <label>
-            <span>Skill: </span>
-            <select name="skill" id="skillSelect" required>
-                <option value="" disabled selected>Select the related skill</option>
-                <% skills.forEach(function(skill) { %>
-                    <option value="<%= skill._id %>"><%= skill.skillName %></option>
-                <% }) %>
-            </select>
-        </label><br>
-        <label>
-            <span>Goal: </span>
-            <select name="goal" id="goalSelect" required disabled>
-                <option value="" disabled selected>Select the related goal</option>
-                <% goals.forEach(function(goal) { %>
-                    <option value="<%= goal._id %>" data-skill="<%= goal.skill %>"><%= goal.name %></option>
-                <% }) %>
-            </select>
-        </label><br>
-        
-        <label>
-            <span>Name: </span>
-            <input type="text" name="name">
-        </label><br>
-        <label>
-            <span>Description: </span>
-            <input type="text" name="description">
-        </label><br>
-        <label>
-            <span>Priority: </span>
-            <select name="priority">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        </label><br>
-        
-        <br><br>
+    const modal = document.querySelector('[data-modal]')
 
-        <button type="submit">Add Daily Task</button>
-    </form>
+    function goBack() {
+        window.history.back()
+    }
 
-    <script>
-        document.getElementById('skillSelect').addEventListener('change', function() {
-            let selectedSkill = this.value
-            let goalSelect = document.getElementById('goalSelect')
-            goalSelect.disabled = !selectedSkill
-            if (selectedSkill) {
-                let goals = document.querySelectorAll('#goalSelect option')
-                goals.forEach(function(goal) {
-                    goal.disabled = (goal.value && goal.getAttribute('data-skill') !== selectedSkill)
-                })
-                goalSelect.value = ''
-            }
-        })
-    </script>
-    
+    modal.addEventListener('click', e => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            goBack()
+        }
+    })
+
+    document.getElementById('skillSelect').addEventListener('change', function() {
+        let selectedSkill = this.value
+        let goalSelect = document.getElementById('goalSelect')
+        goalSelect.disabled = !selectedSkill
+        if (selectedSkill) {
+            let goals = document.querySelectorAll('#goalSelect option')
+            goals.forEach(function(goal) {
+                goal.disabled = (goal.value && goal.getAttribute('data-skill') !== selectedSkill)
+            })
+            goalSelect.value = ''
+        }
+    })
+</script>
+
 <% } %>
 
 <%- include('../partials/footer') %>
