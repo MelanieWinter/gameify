@@ -9,7 +9,6 @@ skillSchema = new Schema({
     skillName: { type: String, required: true },
     category: { type: String },
     description: { type: String },
-    yourWhy: { type: String },
     xp: {
         type: Number,
         default: 10000

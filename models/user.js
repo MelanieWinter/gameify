@@ -13,18 +13,18 @@ const userSchema = new Schema({
         type: String,
         default: 0
     },
-    skill: {
-        type: Schema.Types.ObjectId,
-        ref: 'Skill'
-    },
-    goal: {
-        type: Schema.Types.ObjectId,
-        ref: 'Goal'
-    },
-    task: {
-        type: Schema.Types.ObjectId,
-        ref: 'Task'
-    }
+    // skill: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Skill'
+    // },
+    // goal: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Goal'
+    // },
+    // task: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Task'
+    // }
 }, {
     timestamps: true
 })

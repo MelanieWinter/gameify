@@ -60,8 +60,8 @@ async function edit(req, res) {
 
 async function show(req, res) {
     const task = await Task.findById(req.params.id).populate('skill goal')
-    const skills = await Skill.find({ _id: { $in: task.skill } })
-    const goals = await Skill.find({ _id: { $in: task.goal } })
+    const skills = await Skill.find({ _id: { $in: task.skill }, user: req.user._id })
+    const goals = await Skill.find({ _id: { $in: task.goal }, user: req.user._id })
     res.render('tasks/show', {
         goals,
         skills,
@@ -71,6 +71,7 @@ async function show(req, res) {
 }
 
 async function create(req, res) {
+    req.body.user = req.user._id
     try {
         await Task.create(req.body)
     } catch (err) {

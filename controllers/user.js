@@ -10,15 +10,13 @@ module.exports = {
 }
 
 async function index(req, res) {
-    const user = await User.findOne({}).populate('skill goal task')
-    const skills = await Skill.find({})
-    const goals = await Goal.find({}).populate('skill')
-    const tasks = await Task.find({}).populate('skill goal')
+    const skills = await Skill.find({ user: req.user._id })
+    const goals = await Goal.find({ user: req.user._id }).populate('skill')
+    const tasks = await Task.find({ user: req.user._id }).populate('skill goal')
     res.render('user/index', {
         skills,
         goals,
         tasks,
-        user, 
         title: 'Account Page'
     })
 }

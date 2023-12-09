@@ -82,6 +82,7 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
+    req.body.user = req.user._id
     try {
         await Goal.create(req.body).populate('skill')
     } catch (err) {

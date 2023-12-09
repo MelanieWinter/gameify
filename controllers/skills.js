@@ -64,7 +64,9 @@ async function show(req, res) {
 
 
 async function create(req, res) {
+    req.body.user = req.user._id
     try {
+        console.log(req.body)
         await Skill.create(req.body)
     } catch (err) {
         console.log('ERROR ~~>', err)
@@ -74,22 +76,15 @@ async function create(req, res) {
 }
 
 async function newSkill(req, res) {
-
-
     res.render('skills/new', {
-
         errorMsg: '',
         title: 'New Skill'
     })
 }
 
 async function index(req, res) {
-    // const user = await User.findById(req.params.id)
-    // const skills = await Skill.find({ user: user._id })
-    const skills = await Skill.find({})
-    // console.log(user)
+    const skills = await Skill.find({ user: req.user._id })
     res.render('skills/index', {
-        // user,
         skills, 
         title: 'All Skills'
     })
