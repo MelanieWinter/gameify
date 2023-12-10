@@ -83,16 +83,13 @@
                         <% }) %>
                     </div>
                     <% skills.sort(function(a, b) {
-                        // Define the priority order
-                        const priorityOrder = { 'high': 1, 'medium': 2, 'low': 3 };
-                        // Sort by percentCompleted in descending order
+                        const priorityOrder = { 'high': 1, 'medium': 2, 'low': 3 }
                         const percentCompletedDiff = a.percentCompleted - b.percentCompleted;
                         if (percentCompletedDiff !== 0) {
                             return percentCompletedDiff;
                         }
-                        // If percentCompleted is the same, sort by priority using the defined order
                         return priorityOrder[a.priority] - priorityOrder[b.priority];
-                    });
+                    })
                     
                     skills.forEach(function(s) { %>
                         <% if (s.percentCompleted < 100) { %>
@@ -107,7 +104,6 @@
                             </button>
                         <% } %>
                     <% }) %>
-
                 </div>
             </div>
         </div>
@@ -190,10 +186,57 @@
                     </div>
                 </button>
                 <div class="udd-each">
+                    <button class="accordion add-new">Completed Skills</button>
+                    <div class="panel" style="display: none;">
+                        <% tasks.sort(function(a, b) {
+                            const statusOrder = { 'In Progress': 1, 'Completed': 2, '': 3 };
+                            const priorityOrder = { 'high': 1, 'medium': 2, 'low': 3 };
+                            const statusA = a.status || '';
+                            const statusB = b.status || '';
+                            const skillA = a.skill ? a.skill.skillName : '';
+                            const skillB = b.skill ? b.skill.skillName : '';
+                            const goalA = a.goal ? a.goal.name : '';
+                            const goalB = b.goal ? b.goal.name : '';
+                            const priorityA = a.priority || '';
+                            const priorityB = b.priority || '';
+
+                            if (statusOrder[statusA] !== statusOrder[statusB]) {
+                                return statusOrder[statusA] - statusOrder[statusB]
+                            }
+                            if (skillA !== skillB) {
+                                return skillA.localeCompare(skillB)
+                            }
+                            if (goalA !== goalB) {
+                                return goalA.localeCompare(goalB)
+                            }
+                            if (priorityOrder[priorityA] !== priorityOrder[priorityB]) {
+                                return priorityOrder[priorityA] - priorityOrder[priorityB]
+                            }
+                            return statusA.localeCompare(statusB)
+                        })
+
+                    tasks.forEach(function(t) { %>
+                        <% if (t.status === 'Completed') { %>
+                            <button onclick="window.location.href='/tasks/<%= t._id %>'" class="data" style="background-color: hsla(0, 100%, 64%, 0.2);">
+                                <span>
+                                    <% if (t.priority === 'high') { %>
+                                        &#9734;
+                                    <% } %>
+                                    <%= t.name %>
+                                </span>
+                                <% if (t.skill) { %>
+                                    <span><%= t.skill.skillName %>
+                                <% } %>
+                                <% if (t.goal) { %>
+                                    | <%= t.goal.name %></span>
+                                <% } %>
+                            </button>
+                        <% } %>
+                    <% }) %>
+                    </div>
                     <% tasks.sort(function(a, b) {
                         const statusOrder = { 'In Progress': 1, 'Completed': 2, '': 3 };
                         const priorityOrder = { 'high': 1, 'medium': 2, 'low': 3 };
-
                         const statusA = a.status || '';
                         const statusB = b.status || '';
                         const skillA = a.skill ? a.skill.skillName : '';
@@ -203,45 +246,38 @@
                         const priorityA = a.priority || '';
                         const priorityB = b.priority || '';
 
-                        // Sort by status first
                         if (statusOrder[statusA] !== statusOrder[statusB]) {
-                            return statusOrder[statusA] - statusOrder[statusB];
+                            return statusOrder[statusA] - statusOrder[statusB]
                         }
-
-                        // If status is the same, sort by skill name
                         if (skillA !== skillB) {
-                            return skillA.localeCompare(skillB);
+                            return skillA.localeCompare(skillB)
                         }
-
-                        // If skills are the same, sort by goal name
                         if (goalA !== goalB) {
-                            return goalA.localeCompare(goalB);
+                            return goalA.localeCompare(goalB)
                         }
-
-                        // If skills and goals are the same, sort by priority
                         if (priorityOrder[priorityA] !== priorityOrder[priorityB]) {
-                            return priorityOrder[priorityA] - priorityOrder[priorityB];
+                            return priorityOrder[priorityA] - priorityOrder[priorityB]
                         }
-
-                        // If everything is the same, sort by status
-                        return statusA.localeCompare(statusB);
-                    });
+                        return statusA.localeCompare(statusB)
+                    })
 
                     tasks.forEach(function(t) { %>
-                        <button onclick="window.location.href='/tasks/<%= t._id %>'" class="data" style="background-color: <%= t.status === 'Completed' ? 'hsla(0, 100%, 64%, 0.2)' : 'hsl(0, 0%, 100%, 0.2)' %>;">
-                            <span>
-                                <% if (t.priority === 'high') { %>
-                                    &#9734;
+                        <% if (t.status === 'In Progress') { %>
+                            <button onclick="window.location.href='/tasks/<%= t._id %>'" class="data">
+                                <span>
+                                    <% if (t.priority === 'high') { %>
+                                        &#9734;
+                                    <% } %>
+                                    <%= t.name %>
+                                </span>
+                                <% if (t.skill) { %>
+                                    <span><%= t.skill.skillName %>
                                 <% } %>
-                                <%= t.name %>
-                            </span>
-                            <% if (t.skill) { %>
-                                <span><%= t.skill.skillName %>
-                            <% } %>
-                            <% if (t.goal) { %>
-                                | <%= t.goal.name %></span>
-                            <% } %>
-                        </button>
+                                <% if (t.goal) { %>
+                                    | <%= t.goal.name %></span>
+                                <% } %>
+                            </button>
+                        <% } %>
                     <% }) %>
                 </div>
             </div>
