@@ -1,6 +1,6 @@
 :root {
   --primary-color: hsl(277, 31%, 20%);
-  --translucent-primary-color: hsla(278, 29%, 20%, 0.51);
+  --translucent-primary-color: hsla(278, 29%, 20%, 0.5);
   --primary-background: hsl(0 0% 100%/ 0.2);
 }
 
@@ -13,10 +13,12 @@
 body {
   font-family: 'Jura', sans-serif;
   color: #362342;
+  background-color: rgb(220, 226, 200);
   background-image: 
     url("/images/background/layers/clouds_1.png"), 
     url("/images/background/layers/clouds_4.png"), 
     url("/images/background/layers/sky.png");
+  overflow-y: hidden;
 }
 
 main {
@@ -31,6 +33,7 @@ main {
   flex-direction: row;
   background: var(--primary-background);
   backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
 }
 
 .avatar-div {
@@ -46,6 +49,7 @@ main {
   width: 18vmin;
   background-color: var(--primary-background);
   backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
 }
 
 .user-avatar > img {
@@ -82,20 +86,71 @@ main {
 }
 
 .section-2 {
+  padding: 1vmin;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  background: var(--primary-background);
+  backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
+  min-height: 100vh;
+}
+
+.udd {
+  display: flexbox;
+  flex-direction: column;
 }
 
 .user-data-title {
-  font-size: 1rem;
+  font-size: .75rem;
   font-weight: 700;
+  padding-block: 1.5vmin;
+  font-family: 'Press Start 2P', sans-serif;
 }
 
-.user-data-div .each-data {
-  font-size: 1.25rem;
-  font-weight: 300;
-  border-bottom: 1px solid var(--translucent-primary-color);
+.user-data-div {
+  padding: 1.5vmin;
+  width: 35vmin;
+  height: 59vh;
+  border: 1px transparent white;
+  border-radius: 5px;
+  background: var(--primary-background);
+  backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vmin;
+}
+
+.add-new {
+  padding: 1vmin;
+  width: 33vmin;
+  min-height: 5vmin;
+  background: hsla(278, 29%, 20%, 0.2);
+  backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.data {
+  padding: 1vmin;
+  width: 33vmin;
+  min-height: 4vmin;
+  background: var(--primary-background);
+  backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
+  font-size: .75rem;
+}
+
+.each-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 a {
@@ -221,6 +276,7 @@ a:hover {
   padding: 1.5vmin 5vmin;
   background: var(--primary-background);
   backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
 }
 
 .nav-links {
