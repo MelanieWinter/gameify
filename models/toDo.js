@@ -31,10 +31,10 @@ const toDoSchema = new Schema({
         type: Number,
         default: 50
     },
-    // dateCreated: { 
-    //     type: Date,
-    //     default: Date.now 
-    // },
+    coin: {
+        type: Number,
+        default: 10
+    },
     dueDate: { 
         type: Date
     },

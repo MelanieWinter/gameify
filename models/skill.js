@@ -16,6 +16,10 @@ skillSchema = new Schema({
         type: Number,
         default: 10000
     },
+    coin: {
+        type: Number,
+        default: 100
+    },
     priority: {
         type: String,
         enum: ['low', 'medium', 'high']

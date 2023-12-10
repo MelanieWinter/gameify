@@ -35,21 +35,22 @@ async function update(req, res) {
             { new: true }
         )
         if (updatedGoal.status === 'Completed') {
-            user.coin += 10
+            user.coin += updatedGoal.coin
             user.xp += updatedGoal.xp
+                updatedGoal.coin = 0
+                updatedGoal.xp = 0;
             const skillId = updatedGoal.skill
             const skill = await Skill.findById(skillId)
-            if (updatedGoal.xp === 50) {
+            if (updatedGoal.xp === 50 && updatedGoal.skill) {
                 skill.percentCompleted += 0.5
                 const originalSkillXp = skill.xp
                 if (skill.percentCompleted >= 100) {
                     skill.status = 'Completed'
                     if ( skill.status === 'Completed') {
                         user.xp += originalSkillXp
+                        skill.xp = 0;
                     }
                 }
-                updatedGoal.xp = 0;
-                skill.xp = 0;
                 await skill.save();
             }
             if (user.xp >= user.level * 50000) {

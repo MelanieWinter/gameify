@@ -207,6 +207,11 @@ main {
   gap: .5vmin;
 }
 
+.panel,
+.accordion {
+  margin-bottom: .5vmin;
+}
+
 .data {
   border: 1px solid var(--translucent-primary-color);
   padding: 1vmin;
@@ -259,6 +264,9 @@ dialog h1 {
   gap: 1vmin;
   padding-block: 1vmin;
   margin-top: 1vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .show-modal .form-buttons {
@@ -439,7 +447,7 @@ dialog::backdrop {
   justify-content: center;
 }
 
-.input-container {
+dialog .input-container {
   position: relative;
   height: 16vmin;
   width: 14vmin;
@@ -477,45 +485,6 @@ input:checked + .radio-tile {
   box-shadow: 0 0 12px var(--primary-color);
 }
 
-
-
-/* .modal-content {
-  display: none;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  max-width: 400px;
-  margin: auto;
-} */
-
-/* .modal-content:first-child {
-  display: block;
-} */
-
-/* .step-buttons {
-  overflow: hidden;
-} */
-
-/* .step-buttons button {
-  float: right;
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-} */
-
-/* .card {
-  background: var(--primary-background);
-  border: 1px solid var(--primary-color);
-  border-radius: .5rem;
-  padding: 1.5rem;
-  width: 50vmin;
-  display: none; 
-} */
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -540,22 +509,7 @@ input:checked + .radio-tile {
   padding: .25em;
 }
 
-/* .step-title {
-  margin: 0;
-  margin-bottom: 1rem;
-  text-align: center;
-  font-weight: 700;
-} */
-
-/* .card.active {
-  display: block;
-} */
-
-/* .multi-step-form {
-  overflow: hidden;
-  position: relative;
-} */
-
 .hidden {
   display: none !important;
 }
+

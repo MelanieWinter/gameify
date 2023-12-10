@@ -35,8 +35,10 @@ async function update(req, res) {
             { new: true }
         )
         if (updatedTask.status === 'Completed') {
-            user.coin += 10
+            user.coin += updatedTask.coin
             user.xp += updatedTask.xp
+                updatedTask.xp = 0;
+                updatedTask.coin = 0;
             const skillId = updatedTask.skill
             const skill = await Skill.findById(skillId)
             if (updatedTask.xp === 50 && updatedTask.skill) {
@@ -46,18 +48,19 @@ async function update(req, res) {
                     skill.status = 'Completed'
                     if ( skill.status === 'Completed') {
                         user.xp += originalSkillXp
+                        skill.xp = 0;
                     }
                 }
-                updatedTask.xp = 0;
-                skill.xp = 0;
+
                 await skill.save();
             }
             if (user.xp >= user.level * 50000) {
                 user.level += 1;
             }
+            await user.save()
+            await updatedTask.save()
         }
-        await user.save()
-        await updatedTask.save()
+        
         res.redirect(`/tasks/${taskId}`)
     } catch (err) {
         console.log('ERROR ~~>', err)
@@ -126,7 +129,7 @@ async function index(req, res) {
 async function resetDailyTasks() {
     try {
         await Task.updateMany({ status: 'Completed' }, { $set: { status: 'In Progress' } })
-        await Task.updateMany({}, { $set: { xp: 50 } })
+        await Task.updateMany({}, { $set: { xp: 50, coin: 10 } })
     } catch (err) {
     console.error('Error resetting tasks:', err)
     }

@@ -37,17 +37,18 @@ async function update(req, res) {
             { new: true }
         );
         if (updatedSkill.status === 'Completed') {
-            user.coin += 200;
+            user.coin += updatedSkill.coin;
             user.xp += updatedSkill.xp;
             updatedSkill.percentCompleted = 100;
-            updatedSkill.xp = 0;
+            updatedSkill.coin = 0
+            updatedSkill.xp = 0
             if (user.xp >= user.level * 50000) {
                 user.level += 1;
             }
             await user.save();
             await updatedSkill.save();
-            res.redirect(`/skills/${skillId}`);
         }
+        res.redirect(`/skills/${skillId}`);
     } catch (err) {
         console.log('ERROR ~~>', err);
         res.render(`/skills/${skill._id}`, { errorMsg: err.message });
