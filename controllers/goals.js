@@ -17,8 +17,8 @@ module.exports = {
 async function deleteGoal(req, res) {
     try {
         const goalId = req.params.id
-        const deletedGoal = await Goal.findOneAndDelete({ _id: goalId})
-        res.redirect('/goals')
+        const deletedGoal = await Goal.findOneAndDelete({ _id: goalId })
+        res.redirect('/user')
     } catch (err) {
         console.log('ERROR ~~>', err)
     }
@@ -35,6 +35,7 @@ async function update(req, res) {
             { new: true }
         )
         if (updatedGoal.status === 'Completed') {
+            user.coin += 10
             user.xp += updatedGoal.xp
             const skillId = updatedGoal.skill
             const skill = await Skill.findById(skillId)
@@ -51,6 +52,9 @@ async function update(req, res) {
                 skill.xp = 0;
                 await skill.save();
             }
+            if (user.xp >= user.level * 50000) {
+                user.level += 1;
+            }
         }
         await user.save()
         await updatedGoal.save()
@@ -63,7 +67,7 @@ async function update(req, res) {
 
 async function edit(req, res) {
     const goal = await Goal.findById(req.params.id).populate('skill')
-    const skills = await Skill.find({})
+    const skills = await Skill.find({ user: req.user._id })
     const formattedDueDate = goal.dueDate ? goal.dueDate.toISOString().slice(0, 16) : '';
     res.render('goals/edit', {
         formattedDueDate,
@@ -75,7 +79,7 @@ async function edit(req, res) {
 
 async function show(req, res) {
     const goal = await Goal.findById(req.params.id).populate('skill')
-    const skills = await Skill.find({ _id: { $in: goal.skill } })
+    const skills = await Skill.find({ _id: { $in: goal.skill }, user: req.user._id })
     res.render('goals/show', {
         goal,
         title: 'Goal Details'
@@ -84,8 +88,8 @@ async function show(req, res) {
 
 async function newGoal(req, res) {
     try {
-        const user = req.user
-        const skills = await Skill.find({})
+        const user = req.user    
+        const skills = await Skill.find({ user: req.user._id })
         res.render('goals/new', {
             user,
             skills,
@@ -97,7 +101,7 @@ async function newGoal(req, res) {
 }
 
 async function index(req, res) {
-    const goals = await Goal.find({}).populate('skill')
+    const goals = await Goal.find({ user: req.user._id }).populate('skill')
     res.render('goals/index', {
         goals, 
         title: 'All Goals'
@@ -111,7 +115,7 @@ async function create(req, res) {
     } catch (err) {
         console.log('ERROR ~~>', err)
     }
-    res.redirect('/goals')
+    res.redirect('/user')
 }
 
 

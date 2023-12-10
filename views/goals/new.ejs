@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
                 <label for="goal-skill">Skill</label>
-                    <select name="skill" id="goal-skill" required>
+                    <select name="skill" id="goal-skill">
                         <option value="" disabled selected>Select a skill</option>
                         <% skills.forEach(function(skill) { %>
                             <option value="<%= skill._id %>"><%= skill.skillName %></option>
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="goal-due-date">Due Date</label>
-                    <input type="date" name="dueDate" id="goal-due-date" required>
+                    <input type="date" name="dueDate" id="goal-due-date">
             </div>
             <div class="form-group">
                 <label for="goal-priority">Priority</label>
@@ -40,8 +40,10 @@
                         <option value="high">High</option>
                     </select>
             </div> 
-            <button type="submit" onclick="goBack()">Cancel</button>
-            <button type="submit" name="action" value="submitGoal">Submit</button>
+            <div class="form-buttons">
+                <button type="submit" onclick="goBack()">Cancel</button>
+                <button type="submit" name="action" value="submitGoal">Submit</button>
+            </div>
         </form>
     </dialog>
 

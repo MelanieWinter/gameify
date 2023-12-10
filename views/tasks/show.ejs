@@ -2,48 +2,89 @@
 
 <% if (user) { %>
 
-    <br><br>
+    <dialog data-modal id="showTaskModal" class="show-task-modal">
+        <h1><%= task.name %></h1>
+        <section>
+            <div>
+                <span>Daily Task Name:</span>
+                <span><%= task.name %></span>
+            </div> 
+            
+            <% if (task.skill) { %>
+                <div>
+                    <span>Skill:</span>
+                    <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
+                </div> 
+            <% } %>
 
-    <h1><%= title %></h1>
+            <% if (task.goal) { %>
+                <div>
+                    <span>Goal:</span>
+                    <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
+                </div>
+            <% } %>
 
-    <section>
-        <div>
-            <span>Daily Task Name:</span>
-            <span><%= task.name %></span>
-        </div>  
-        <div>
-            <span>Skill:</span>
-            <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
-        </div> 
-        <div>
-            <span>Goal:</span>
-            <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
-        </div>
-        <div>
-            <span>Type:</span>
-            <span><%= task.type %></span>
-        </div>  
-        <div>
-            <span>Description:</span>
-            <span><%= task.description %></span>
-        </div>
-        <div>
-            <span>XP:</span>
-            <span><%= task.xp %></span>
-        </div>
-        <div>
-            <span>Priority:</span>
-            <span><%= task.priority %></span>
-        </div>
-        <div>
-            <span>Status:</span>
-            <span><%= task.status %></span>
-        </div>
-    </section>
+            <div>
+                <span>Type:</span>
+                <span><%= task.type %></span>
+            </div>  
 
-    <br><br>
+            <% if (task.description) { %>
+                <div>
+                    <span>Description:</span>
+                    <span><%= task.description %></span>
+                </div>
+            <% } %>
 
-    <div><a href="/tasks/<%= task._id %>/edit">Edit Task</a></div>
+            <div>
+                <span>XP:</span>
+                <span><%= task.xp %></span>
+            </div>
+
+            <% if (task.priority) { %>
+                <div>
+                    <span>Priority:</span>
+                    <span><%= task.priority %></span>
+                </div>
+            <% } %>
+
+            <div>
+                <span>Status:</span>
+                <span><%= task.status %></span>
+            </div>
+        </section>
+        <div class="form-buttons">
+            <button type="button" onclick="window.location.href='/user'">Account</button>
+            <button onclick="window.location.href='/tasks/<%= task._id %>/edit'">Edit Task</button>
+        </div>
+    </dialog>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.querySelector('[data-modal]')
+            modal.showModal()
+        })
+    
+        const modal = document.querySelector('[data-modal]')
+    
+        function goBack() {
+            window.history.back()
+        }
+    
+        modal.addEventListener('click', e => {
+            const dialogDimensions = modal.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                goBack()
+            }
+        })
+    
+    </script>
 
 <% } %>
 

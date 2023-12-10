@@ -2,12 +2,13 @@
 
 <% if (user) { %>
 
-    <dialog data-modal id="newSkillModal" class="new-skill-modal">
+    <dialog data-modal id="editSkillModal" class="edit-skill-modal edit-modal">
+        <h1 class="step-title">Edit Your <b><%= skill.skillName %></b> Skill</h1>
         <form action="/skills/<%= skill._id %>?_method=PUT" method="POST">
-            <h3 class="step-title">Update Your <%= skill.skillName %> Skill</h3>
+            
             <div class="form-group">
                 <label for="skill-name">Skill Name</label>
-                    <input type="text" name="skillName" id="skill-name" value="<%= skill.skillName %>">
+                    <input type="text" name="skillName" id="skill-name" value="<%= skill.skillName %>" required>
             </div>
             <div class="form-group">
                 <label for="skill-category">Category</label>
@@ -25,8 +26,19 @@
                     <option value="high" <%= skill.priority === 'high' ? 'selected' : '' %>>High</option>
                 </select>
             </div> 
-            <button type="button" onclick="goBack()">Cancel</button>
-            <button type="submit" name="action" value="submitSkill">Submit</button>
+            <div class="form-group">
+                <label for="skillStatus">Status</label>
+                <select name="status" id="skillStatus">
+                    <option value="In Progress" <%= skill.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                    <option value="Completed" <%= skill.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+                </select>
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" onclick="goBack()">Cancel</button>
+                <button type="submit" name="action" value="submitSkill">Submit</button>
+            </div>
+
         </form>
         <form action="/skills/<%= skill._id %>?_method=DELETE" method="POST">
             <button type="submit" onclick="return confirm('GOALS and DAILY TASKS associated with this skill will also be deleted.')">Delete Skill</button>
@@ -34,6 +46,8 @@
     </dialog>
 
     <script>
+        const checkbox = document.getElementById('skillStatus');
+
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.querySelector('[data-modal]')
             modal.showModal()

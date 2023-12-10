@@ -6,7 +6,10 @@ skillSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    skillName: { type: String, required: true },
+    skillName: { 
+        type: String, 
+        required: true 
+    },
     category: { type: String },
     description: { type: String },
     xp: {

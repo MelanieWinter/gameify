@@ -17,10 +17,10 @@ module.exports = {
 async function deleteSkill(req, res) {
     try {
         const skillId = req.params.id
-        await Goal.deleteMany({ skill: skillId})
-        await Task.deleteMany({ skill: skillId})
+        await Goal.deleteMany({ skill: skillId })
+        await Task.deleteMany({ skill: skillId })
         const deletedSkill = await Skill.findOneAndDelete({ _id: skillId})
-        res.redirect('/skills')
+        res.redirect('/user')
     } catch (err) {
         console.log('ERROR ~~>', err)
         res.render('skills/delete', { errorMsg: err.message})
@@ -28,17 +28,29 @@ async function deleteSkill(req, res) {
 }
 
 async function update(req, res) {
+    const user = req.user;
     try {
-        const skillId = req.params.id
+        const skillId = req.params.id;
         const updatedSkill = await Skill.findOneAndUpdate(
             { _id: skillId },
             { $set: req.body },
             { new: true }
-        )
-        res.redirect(`/skills/${skillId}`);
+        );
+        if (updatedSkill.status === 'Completed') {
+            user.coin += 200;
+            user.xp += updatedSkill.xp;
+            updatedSkill.percentCompleted = 100;
+            updatedSkill.xp = 0;
+            if (user.xp >= user.level * 50000) {
+                user.level += 1;
+            }
+            await user.save();
+            await updatedSkill.save();
+            res.redirect(`/skills/${skillId}`);
+        }
     } catch (err) {
-        console.log('ERROR ~~>', err)
-        res.render(`/skills/${skill._id}`, { errorMsg: err.message })
+        console.log('ERROR ~~>', err);
+        res.render(`/skills/${skill._id}`, { errorMsg: err.message });
     }
 }
 
@@ -52,8 +64,8 @@ async function edit(req, res) {
 
 async function show(req, res) {
     const skill = await Skill.findById(req.params.id)
-    const goals = await Goal.find({skill: skill._id})
-    const tasks = await Task.find({skill: skill._id})
+    const goals = await Goal.find({ skill: skill._id, user: req.user._id })
+    const tasks = await Task.find({ skill: skill._id, user: req.user._id})
     res.render('skills/show', {
         tasks,
         goals,
@@ -72,7 +84,7 @@ async function create(req, res) {
         console.log('ERROR ~~>', err)
         res.render('skills/new', { errorMsg: err.message })
     }
-    res.redirect('/skills')
+    res.redirect('/user')
 }
 
 async function newSkill(req, res) {

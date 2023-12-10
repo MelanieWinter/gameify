@@ -22,7 +22,10 @@ const toDoSchema = new Schema({
         type: String,
         enum: ['goal', 'dailyTask']
     },
-    name: { type: String },
+    name: { 
+        type: String,
+        required: true
+    },
     description: { type: String },
     xp: { 
         type: Number,
@@ -33,12 +36,7 @@ const toDoSchema = new Schema({
         default: Date.now 
     },
     dueDate: { 
-        type: Date,
-        default: function() {
-            const oneMonthLater = new Date(this.dateCreated)
-            oneMonthLater.setMonth(oneMonthLater.getMonth() + 1)
-            return oneMonthLater
-        }
+        type: Date
     },
     priority: {
         type: String,

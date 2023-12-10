@@ -12,7 +12,7 @@
             </div>
             <div class="form-group">
                 <label for="task-skill">Skill</label>
-                    <select name="skill" id="skillSelect" required>
+                    <select name="skill" id="skillSelect">
                         <option value="" disabled selected>Select the related skill</option>
                         <% skills.forEach(function(skill) { %>
                             <option value="<%= skill._id %>"><%= skill.skillName %></option>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="task-goal">Goal</label>
-                    <select name="goal" id="goalSelect" required disabled>
+                    <select name="goal" id="goalSelect" disabled>
                         <option value="" disabled selected>Select the related goal</option>
                         <% goals.forEach(function(goal) { %>
                             <option value="<%= goal._id %>" data-skill="<%= goal.skill %>"><%= goal.name %></option>
@@ -44,8 +44,11 @@
                         <option value="high">High</option>
                     </select>
             </div>
-            <button type="submit" onclick="goBack()">Cancel</button>
-            <button type="submit" name="action" value="submitGoal">Submit</button>
+            <div class="form-buttons">
+                <button type="submit" onclick="goBack()">Cancel</button>
+                <button type="submit" name="action" value="submitGoal">Submit</button>
+            </div>
+
         </form>
     </dialog>
 
@@ -73,14 +76,14 @@
     //     }
     // })
 
-    document.getElementById('skillSelect').addEventListener('change', function() {
+    document.getElementById('skillSelect').addEventListener('change', function () {
         let selectedSkill = this.value
         let goalSelect = document.getElementById('goalSelect')
         goalSelect.disabled = !selectedSkill
         if (selectedSkill) {
             let goals = document.querySelectorAll('#goalSelect option')
-            goals.forEach(function(goal) {
-                goal.disabled = (goal.value && goal.getAttribute('data-skill') !== selectedSkill)
+            goals.forEach(function (goal) {
+                goal.disabled = !goal.value || (goal.getAttribute('data-skill') !== selectedSkill)
             })
             goalSelect.value = ''
         }

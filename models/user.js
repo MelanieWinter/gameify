@@ -12,6 +12,14 @@ const userSchema = new Schema({
     xp: {
         type: Number,
         default: 0
+    },
+    coin: {
+        type: Number,
+        default: 0
+    },
+    level: {
+        type: Number,
+        default: 1
     }
 }, {
     timestamps: true
