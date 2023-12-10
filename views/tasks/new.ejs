@@ -3,6 +3,7 @@
 <% if (user) { %>
 
     <dialog data-modal id="newTaskModal" class="new-task-modal">
+        <h1>Add a <b>New</b> Daily Task</h1>
         <form action="/tasks" method="POST">
             <div class="form-group">
                 <label for="task-type">Type</label>
@@ -14,16 +15,16 @@
                 <label for="task-skill">Skill</label>
                     <select name="skill" id="skillSelect">
                         <option value="" disabled selected>Select the related skill</option>
-                        <% skills.forEach(function(skill) { %>
+                        <% skills.filter(skill => skill.status === 'In Progress').forEach(function(skill) { %>
                             <option value="<%= skill._id %>"><%= skill.skillName %></option>
                         <% }) %>
                     </select>
             </div>
             <div class="form-group">
                 <label for="task-goal">Goal</label>
-                    <select name="goal" id="goalSelect" disabled>
+                    <select name="goal" id="goalSelect">
                         <option value="" disabled selected>Select the related goal</option>
-                        <% goals.forEach(function(goal) { %>
+                        <% goals.filter(goal => goal.status === 'In Progress').forEach(function(goal) { %>
                             <option value="<%= goal._id %>" data-skill="<%= goal.skill %>"><%= goal.name %></option>
                         <% }) %>
                     </select>
@@ -79,7 +80,7 @@
     document.getElementById('skillSelect').addEventListener('change', function () {
         let selectedSkill = this.value
         let goalSelect = document.getElementById('goalSelect')
-        goalSelect.disabled = !selectedSkill
+        // goalSelect.disabled = !selectedSkill
         if (selectedSkill) {
             let goals = document.querySelectorAll('#goalSelect option')
             goals.forEach(function (goal) {

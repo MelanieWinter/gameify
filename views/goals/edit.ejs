@@ -15,7 +15,6 @@
                 <label for="goal-name">Name</label>
                     <input type="text" name="name" id="goal-name" required value="<%= goal.name %>">
             </div>
-
             <div class="form-group">
                 <label for="goal-description">Description</label>
                     <input type="text" name="description" id="goal-description" value="<%= goal.description %>">
@@ -24,6 +23,22 @@
             <div class="form-group">
                 <label for="goal-due-date">Due Date</label>
                 <input type="date" name="dueDate" id="goal-due-date" value="<% if (goal.dueDate) { %><%= goal.dueDate.toISOString().split('T')[0] %><% } %>">
+            </div>
+
+            <div class="form-group">
+                <label for="goal-skill">Associated Skill</label>
+                    <select name="skill" id="goal-skill">
+                        <% if (!goal.skill) { %>
+                            <option value="" disabled selected>Select a skill</option>
+                            <% skills.forEach(function(skill) { %> 
+                                <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                            <% }) %>
+                        <% } else if (goal.skill) { %>
+                            <% skills.forEach(function(skill) { %> 
+                                <option value="<%= skill._id %>" <%= skill.skillName === goal.skill.skillName ? 'selected' : '' %>><%= skill.skillName %></option>
+                            <% }) %>
+                        <% } %>
+                    </select>
             </div>
 
             <div class="form-group">

@@ -4,7 +4,7 @@
 
 
     <dialog data-modal id="showGoalModal" class="show-goal-modal show-modal">
-        <h1><%= goal.name %> Details</h1>
+        <h1>Details For Your <b><%= goal.name %></b> Goal</h1>
 
         <section>
             <div>
@@ -14,7 +14,7 @@
 
             <% if (goal.skill) { %>
                 <div>
-                    <span>Skill:</span>
+                    <span>Associated Skill:</span>
                     <span><a href="/skills/<%= goal.skill._id %>"><%= goal.skill.skillName %></a></span>
                 </div> 
             <% } %>
@@ -36,15 +36,10 @@
                 <span><%= goal.xp %></span>
             </div>
 
-            <div>
-                <span>Date Created:</span>
-                <span><%= goal.dateCreated.toLocaleString() %></span>
-            </div>
-
             <% if (goal.dueDate) { %>
                 <div>
                     <span>Due Date:</span>
-                    <span><%= goal.dueDate.toLocaleString() %></span>
+                    <span><%= goal.dueDate.toLocaleDateString() %></span>
                 </div>
             <% } %>
 
@@ -65,7 +60,6 @@
             <button type="button" onclick="window.location.href='/user'">Account</button>
             <button onclick="window.location.href='/goals/<%= goal._id %>/edit'">Edit Goal</button>
         </div>
-
     </dialog>
 
     <script>
@@ -88,7 +82,7 @@
                 e.clientY < dialogDimensions.top ||
                 e.clientY > dialogDimensions.bottom
             ) {
-                goBack()
+                window.location.href='/user'
             }
         })
     

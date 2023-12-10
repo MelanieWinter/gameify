@@ -3,8 +3,8 @@
 <% if (user) { %>
 
     <dialog data-modal id="newSkillModal" class="new-skill-modal">
+        <h1>Add a <b>New</b> Skill</h1>
         <form action="/skills" method="POST">
-            <h3 class="step-title">Add New Skill</h3>
             <div class="form-group">
                 <label for="skill-name">Skill Name</label>
                     <input type="text" name="skillName" id="skill-name" required>

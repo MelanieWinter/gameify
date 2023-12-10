@@ -3,7 +3,7 @@
 <% if (user) { %>
 
     <dialog data-modal id="showSkillModal" class="show-skill-modal show-modal">
-        <h1><%= skill.skillName %> Details</h1>
+        <h1>Details For Your <b><%= skill.skillName %></b> Skill</h1>
         
         <section>
             <div>Name: <%= skill.skillName %></div>
@@ -26,6 +26,7 @@
             <% goals.forEach(function(g) { %>
                 <div>
                     <span><a href="/goals/<%= g._id %>"><%= g.name %></a></span>
+                    <span>| <%= g.status %></span>
                     <% if (g.status === 'In Progress' && g.dueDate) { %>
                         <span> | Due: <%= g.dueDate.toLocaleDateString() %></span>
                     <% } %>
@@ -69,7 +70,7 @@
                 e.clientY < dialogDimensions.top ||
                 e.clientY > dialogDimensions.bottom
             ) {
-                goBack()
+                window.location.href='/user'
             }
         })
     

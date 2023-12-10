@@ -3,7 +3,7 @@
 <% if (user) { %>
 
     <dialog data-modal id="showTaskModal" class="show-task-modal">
-        <h1><%= task.name %></h1>
+        <h1>Details For Your <b><%= task.name %></b> Daily Task</h1>
         <section>
             <div>
                 <span>Daily Task Name:</span>
@@ -12,15 +12,15 @@
             
             <% if (task.skill) { %>
                 <div>
-                    <span>Skill:</span>
+                    <span>Associated Skill:</span>
                     <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
                 </div> 
             <% } %>
 
             <% if (task.goal) { %>
                 <div>
-                    <span>Goal:</span>
-                    <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
+                    <span>Associated Goal:</span>
+                    <span><a href="/goals/<%= task.goal._id %>"><%= task.goal.name %></a></span>
                 </div>
             <% } %>
 
@@ -80,7 +80,7 @@
                 e.clientY < dialogDimensions.top ||
                 e.clientY > dialogDimensions.bottom
             ) {
-                goBack()
+                window.location.href='/user'
             }
         })
     

@@ -3,8 +3,8 @@
 <% if (user) { %>
 
     <dialog data-modal id="newGoalModal" class="new-goal-modal">
+        <h1>Add a <b>New</b> Goal</h1>
         <form action="/goals" method="POST">
-            <h3 class="step-title">Add A Goal</h3>
             <div class="form-group">
                 <label for="goal-type">Type</label>
                     <select name="type" id="goal-type" required>
@@ -13,12 +13,12 @@
             </div>
             <div class="form-group">
                 <label for="goal-skill">Skill</label>
-                    <select name="skill" id="goal-skill">
-                        <option value="" disabled selected>Select a skill</option>
-                        <% skills.forEach(function(skill) { %>
-                            <option value="<%= skill._id %>"><%= skill.skillName %></option>
-                        <% }) %>
-                    </select>
+                <select name="skill" id="goal-skill">
+                    <option value="" disabled selected>Select a skill</option>
+                    <% skills.filter(skill => skill.status === 'In Progress').forEach(function(skill) { %>
+                        <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                    <% }) %>
+                </select>
             </div>
             <div class="form-group">
                 <label for="goal-name">Name</label>

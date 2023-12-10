@@ -22,6 +22,38 @@
             </div>
 
             <div class="form-group">
+                <label for="task-skill">Associated Skill</label>
+                    <select name="skill" id="task-skill">
+                        <% if (!task.skill) { %>
+                            <option value="" disabled selected>Select a skill</option>
+                            <% skills.forEach(function(skill) { %> 
+                                <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                            <% }) %>
+                        <% } else if (task.skill) { %>
+                            <% skills.forEach(function(skill) { %> 
+                                <option value="<%= skill._id %>" <%= skill.skillName === task.skill.skillName ? 'selected' : '' %>><%= skill.skillName %></option>
+                            <% }) %>
+                        <% } %>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="task-goal">Associated Goal</label>
+                    <select name="goal" id="task-goal">
+                        <% if (!task.goal) { %>
+                            <option value="" disabled selected>Select a goal</option>
+                            <% goals.forEach(function(goal) { %> 
+                                <option value="<%= goal._id %>"><%= goal.name %></option>
+                            <% }) %>
+                        <% } else if (task.goal) { %>
+                            <% goals.forEach(function(goal) { %> 
+                                <option value="<%= goal._id %>" <%= goal.name === task.goal.name ? 'selected' : '' %>><%= goal.name %></option>
+                            <% }) %>
+                        <% } %>
+                    </select>
+            </div>
+
+            <div class="form-group">
                 <label for="task-priority">Priority</label> 
                 <select name="priority" id="task-priority">
                     <option value="low" <%= task.priority === 'low' ? 'selected' : '' %>>Low</option>
@@ -36,7 +68,7 @@
                     <option value="In Progress" <%= task.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
                     <option value="Completed" <%= task.status === 'Completed' ? 'selected' : '' %>>Completed</option>
                 </select>
-            </div>
+            </div> 
 
             <div class="form-buttons">
                 <button type="submit" onclick="goBack()">Cancel</button>

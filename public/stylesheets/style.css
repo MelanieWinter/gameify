@@ -59,6 +59,13 @@ button:hover {
   font-weight: 500;
 }
 
+button:active,
+.avatar-selector-button:active,
+a:active {
+  transform: scale(.95);
+  transition: transform 25ms ease-in;
+}
+
 a {
   text-decoration: none; 
   color: var(--primary-color);
@@ -66,7 +73,7 @@ a {
 }
 
 a:hover {
-  transform: scale(0.95);
+  transform: scale(1.05);
   transition: transform 25ms ease-in;
 }
 
@@ -127,11 +134,12 @@ main {
   border: none;
   background: none;
   box-shadow: none;
+  backdrop-filter: none;
 }
 
 .avatar-selector-button:hover {
   cursor: pointer;
-  transform: scale(.95);
+  transform: scale(1.05);
   transition: transform 25ms ease-in;
   outline: none;
 }
@@ -231,6 +239,7 @@ dialog button:hover {
 }
 
 dialog h1 {
+  text-align: center;
   padding-top: 1vmin;
   font-weight: 400;
 }
