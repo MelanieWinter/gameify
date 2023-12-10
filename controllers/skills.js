@@ -35,7 +35,7 @@ async function update(req, res) {
             { $set: req.body },
             { new: true }
         )
-        res.redirect('/skills');
+        res.redirect(`/skills/${skillId}`);
     } catch (err) {
         console.log('ERROR ~~>', err)
         res.render(`/skills/${skill._id}`, { errorMsg: err.message })

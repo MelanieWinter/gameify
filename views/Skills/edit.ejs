@@ -2,47 +2,62 @@
 
 <% if (user) { %>
 
-    <br><br>
+    <dialog data-modal id="newSkillModal" class="new-skill-modal">
+        <form action="/skills/<%= skill._id %>?_method=PUT" method="POST">
+            <h3 class="step-title">Update Your <%= skill.skillName %> Skill</h3>
+            <div class="form-group">
+                <label for="skill-name">Skill Name</label>
+                    <input type="text" name="skillName" id="skill-name" value="<%= skill.skillName %>">
+            </div>
+            <div class="form-group">
+                <label for="skill-category">Category</label>
+                    <input type="text" name="category" id="skill-category" value="<%= skill.category %>">
+            </div>
+            <div class="form-group">
+                <label for="skill-description">Description</label>
+                    <input type="text" name="description" id="skill-description" value="<%= skill.description %>">
+            </div>
+            <div class="form-group">
+                <label for="skill-priority">Priority</label> 
+                <select name="priority" id="skill-priority">
+                    <option value="low" <%= skill.priority === 'low' ? 'selected' : '' %>>Low</option>
+                    <option value="medium" <%= skill.priority === 'medium' ? 'selected' : '' %>>Medium</option>
+                    <option value="high" <%= skill.priority === 'high' ? 'selected' : '' %>>High</option>
+                </select>
+            </div> 
+            <button type="button" onclick="goBack()">Cancel</button>
+            <button type="submit" name="action" value="submitSkill">Submit</button>
+        </form>
+        <form action="/skills/<%= skill._id %>?_method=DELETE" method="POST">
+            <button type="submit" onclick="return confirm('GOALS and DAILY TASKS associated with this skill will also be deleted.')">Delete Skill</button>
+        </form>
+    </dialog>
 
-    <h1><%= title %></h1>
-
-    <form action="/skills/<%= skill._id %>?_method=PUT" method="POST">
-        <label>
-            Skill Name: <input type="text" name="skillName" value="<%= skill.skillName %>">
-        </label><br>
-        <label>
-            Category: <input type="text" name="category" value="<%= skill.category %>">
-        </label><br>
-        <label>
-            Description: <input type="text" name="description" value="<%= skill.description %>">
-        </label><br>
-        <label>
-            Priority: 
-            <select name="priority" value="<%= skill.priority %>">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        </label><br>
-        <label>
-            <span>Status: </span>
-            <select name="status" value="<%= skill.status %>">
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-            </select>
-        </label>
-
-        <br><br>
-
-        <button type="submit">Edit Skill</button>
-    </form>
-
-    <br><br>
-
-    <form action="/skills/<%= skill._id %>?_method=DELETE" method="POST">
-        <button type="submit" onclick="return confirm('GOALS and DAILY TASKS associated with this skill will also be deleted.')">Delete Skill</button>
-        
-    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.querySelector('[data-modal]')
+            modal.showModal()
+        })
+    
+        const modal = document.querySelector('[data-modal]')
+    
+        function goBack() {
+            window.history.back()
+        }
+    
+        // modal.addEventListener('click', e => {
+        //     const dialogDimensions = modal.getBoundingClientRect();
+        //     if (
+        //         e.clientX < dialogDimensions.left ||
+        //         e.clientX > dialogDimensions.right ||
+        //         e.clientY < dialogDimensions.top ||
+        //         e.clientY > dialogDimensions.bottom
+        //     ) {
+        //         goBack()
+        //     }
+        // })
+    
+    </script>
 
 <% } %>
 

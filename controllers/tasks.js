@@ -24,27 +24,42 @@ async function deleteTask(req, res) {
     }
 }
 
-
 async function update(req, res) {
-    const task = await Task.findById(req.params.id)
     const user = req.user
+    const taskId = req.params.id
+
     try {
-        const taskId = req.params.id
         const updatedTask = await Task.findOneAndUpdate(
             { _id: taskId },
             { $set: req.body },
             { new: true }
         )
-        if (task.status === 'completed') {
-            user.xp += task.xp
+        if (updatedTask.status === 'Completed') {
+            user.xp += updatedTask.xp
+            const skillId = updatedTask.skill
+            const skill = await Skill.findById(skillId)
+            if (updatedTask.xp === 50) {
+                skill.percentCompleted += 0.5
+                const originalSkillXp = skill.xp
+                if (skill.percentCompleted >= 100) {
+                    skill.status = 'Completed'
+                    if ( skill.status === 'Completed') {
+                        user.xp += originalSkillXp
+                    }
+                }
+                updatedTask.xp = 0;
+                skill.xp = 0;
+                await skill.save();
+            }
         }
-        res.redirect(`/tasks/${taskId}`);
+        await user.save()
+        await updatedTask.save()
+        res.redirect(`/tasks/${taskId}`)
     } catch (err) {
         console.log('ERROR ~~>', err)
+        res.status(500).send('Internal Server Error')
     }
 }
-
-
 
 async function edit(req, res) {
     const task = await Task.findById(req.params.id).populate('skill goal')

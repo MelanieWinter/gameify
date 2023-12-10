@@ -2,65 +2,68 @@
 
 <% if (user) { %>
 
-    <br><br>
+    <dialog data-modal id="newGoalModal" class="new-goal-modal">
+        <form action="/goals/<%= goal._id %>?_method=PUT" method="POST">
+            <h3 class="step-title">Edit Your <%= goal.name %> Goal</h3>
+            <div class="form-group">
+                <label for="goal-type">Type</label>
+                    <select name="type" id="goal-type" required>
+                        <option value="goal">Goal</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="goal-name">Name</label>
+                    <input type="text" name="name" id="goal-name" required value="<%= goal.name %>">
+            </div>
+            <div class="form-group">
+                <label for="goal-description">Description</label>
+                    <input type="text" name="description" id="goal-description" value="<%= goal.description %>">
+            </div>
+            <div class="form-group">
+                <label for="goal-due-date">Due Date</label>
+                <input type="date" name="dueDate" id="goal-due-date" required value="<%= goal.dueDate.toISOString().split('T')[0] %>">
+            </div>
+            <div class="form-group">
+                <label for="goal-priority">Priority</label> 
+                <select name="priority" id="goal-priority">
+                    <option value="low" <%= goal.priority === 'low' ? 'selected' : '' %>>Low</option>
+                    <option value="medium" <%= goal.priority === 'medium' ? 'selected' : '' %>>Medium</option>
+                    <option value="high" <%= goal.priority === 'high' ? 'selected' : '' %>>High</option>
+                </select>
+            </div> 
+            <button type="submit" onclick="goBack()">Cancel</button>
+            <button type="submit" name="action" value="submitGoal">Submit</button>
+        </form>
+        <form action="/goals/<%= goal._id %>?_method=DELETE" method="POST">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this GOAL?')">Delete Goal</button>
+        </form>
+    </dialog>
 
-    <h1><%= title %></h1>
-
-    <form action="/goals/<%= goal._id %>?_method=PUT" method="POST">
-        <label>
-            <span>Type: </span>
-            <select name="type" value="<%= goal.type %>">
-                <option value="longTermGoal">Long Term Goal</option>
-                <option value="shortTermGoal">Short Term Goal</option>
-            </select>
-        </label><br>
-        <label>
-            <span>Skill: </span>
-            <select name="skill" value="<%= goal.skill %>" required>
-                <!-- <option value="" disabled selected>Select a skill</option> -->
-                <% skills.forEach(function(skill) { %>
-                    <option value="<%= skill._id %>"><%= skill.skillName %></option>
-                <% }) %>
-            </select>
-        </label><br>
-        <label>
-            <span>Name: </span>
-            <input type="text" name="name" value="<%= goal.name %>">
-        </label><br>
-        <label>
-            <span>Description: </span>
-            <input type="text" name="description" value="<%= goal.description %>">
-        </label><br>
-        <label>
-            <span>Due Date: </span>
-            <input type="datetime-local" name="dueDate" value="<%= formattedDueDate %>">
-        </label><br>
-        <label>
-            <span>Priority: </span>
-            <select name="priority" value="<%= goal.priority %>">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        </label><br>
-        <label>
-            <span>Status: </span>
-            <select name="status" value="<%= goal.status %>">
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-            </select>
-        </label>
-        
-        <br><br>
-
-        <button type="submit">Edit Goal</button>
-    </form>
-
-    <br><br>
-
-    <form action="/goals/<%= goal._id %>?_method=DELETE" method="POST">
-        <button type="submit" onclick="return confirm('Are you sure you want to delete this GOAL?')">Delete Goal</button>
-    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.querySelector('[data-modal]')
+            modal.showModal()
+        })
+    
+        const modal = document.querySelector('[data-modal]')
+    
+        function goBack() {
+            window.history.back()
+        }
+    
+        // modal.addEventListener('click', e => {
+        //     const dialogDimensions = modal.getBoundingClientRect();
+        //     if (
+        //         e.clientX < dialogDimensions.left ||
+        //         e.clientX > dialogDimensions.right ||
+        //         e.clientY < dialogDimensions.top ||
+        //         e.clientY > dialogDimensions.bottom
+        //     ) {
+        //         goBack()
+        //     }
+        // })
+    
+    </script>
 
 <% } %>
 

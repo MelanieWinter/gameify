@@ -7,9 +7,8 @@
             <h3 class="step-title">Add A Goal</h3>
             <div class="form-group">
                 <label for="goal-type">Type</label>
-                    <select name="type" id="goal-type">
-                        <option value="longTermGoal">Long Term Goal</option>
-                        <option value="shortTermGoal">Short Term Goal</option>
+                    <select name="type" id="goal-type" required>
+                        <option value="goal">Goal</option>
                     </select>
             </div>
             <div class="form-group">
@@ -31,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="goal-due-date">Due Date</label>
-                    <input type="datetime-local" name="dueDate" id="goal-due-date">
+                    <input type="date" name="dueDate" id="goal-due-date" required>
             </div>
             <div class="form-group">
                 <label for="goal-priority">Priority</label>
@@ -58,17 +57,17 @@
         window.history.back()
     }
 
-    modal.addEventListener('click', e => {
-        const dialogDimensions = modal.getBoundingClientRect();
-        if (
-            e.clientX < dialogDimensions.left ||
-            e.clientX > dialogDimensions.right ||
-            e.clientY < dialogDimensions.top ||
-            e.clientY > dialogDimensions.bottom
-        ) {
-            goBack()
-        }
-    })
+    // modal.addEventListener('click', e => {
+    //     const dialogDimensions = modal.getBoundingClientRect();
+    //     if (
+    //         e.clientX < dialogDimensions.left ||
+    //         e.clientX > dialogDimensions.right ||
+    //         e.clientY < dialogDimensions.top ||
+    //         e.clientY > dialogDimensions.bottom
+    //     ) {
+    //         goBack()
+    //     }
+    // })
 </script>
 
 <% } %>

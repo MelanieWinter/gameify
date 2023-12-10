@@ -20,11 +20,14 @@ const toDoSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ['longTermGoal', 'shortTermGoal', 'dailyTask']
+        enum: ['goal', 'dailyTask']
     },
     name: { type: String },
     description: { type: String },
-    xp: { type: Number, default: 500 },
+    xp: { 
+        type: Number,
+        default: 50
+    },
     dateCreated: { 
         type: Date,
         default: Date.now 

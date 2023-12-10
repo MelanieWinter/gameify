@@ -10,21 +10,9 @@ const userSchema = new Schema({
     email: String,
     avatar: String,
     xp: {
-        type: String,
+        type: Number,
         default: 0
-    },
-    // skill: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Skill'
-    // },
-    // goal: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Goal'
-    // },
-    // task: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Task'
-    // }
+    }
 }, {
     timestamps: true
 })

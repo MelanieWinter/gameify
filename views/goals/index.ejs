@@ -15,7 +15,7 @@
                 <% } %>
                 <span> - <%= g.status %></span>
                 <% if (g.status === 'In Progress') { %>
-                    <span> - Complete By: <%= g.dueDate.toLocaleString() %></span>
+                    <span> - Complete By: <%= g.dueDate.toLocaleDateString() %></span>
                 <% } %>
             </div>
         <% }) %>

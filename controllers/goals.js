@@ -25,16 +25,39 @@ async function deleteGoal(req, res) {
 }
 
 async function update(req, res) {
+    const user = req.user
+    const goalId = req.params.id
+
     try {
-        const goalId = req.params.id
         const updatedGoal = await Goal.findOneAndUpdate(
             { _id: goalId },
             { $set: req.body },
             { new: true }
         )
-        res.redirect(`/goals/${goalId}`);
+        if (updatedGoal.status === 'Completed') {
+            user.xp += updatedGoal.xp
+            const skillId = updatedGoal.skill
+            const skill = await Skill.findById(skillId)
+            if (updatedGoal.xp === 50) {
+                skill.percentCompleted += 0.5
+                const originalSkillXp = skill.xp
+                if (skill.percentCompleted >= 100) {
+                    skill.status = 'Completed'
+                    if ( skill.status === 'Completed') {
+                        user.xp += originalSkillXp
+                    }
+                }
+                updatedGoal.xp = 0;
+                skill.xp = 0;
+                await skill.save();
+            }
+        }
+        await user.save()
+        await updatedGoal.save()
+        res.redirect(`/goals/${goalId}`)
     } catch (err) {
         console.log('ERROR ~~>', err)
+        res.status(500).send('Internal Server Error')
     }
 }
 
@@ -90,3 +113,5 @@ async function create(req, res) {
     }
     res.redirect('/goals')
 }
+
+
