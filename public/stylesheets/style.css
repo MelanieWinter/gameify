@@ -176,7 +176,7 @@ main {
 
 .user-data-div {
   padding: 1.5vmin;
-  width: 22vw;
+  width: 28vw;
   height: 58.5vh;
   border: 1px transparent white;
   border-radius: 5px;
@@ -550,7 +550,8 @@ input:checked + .radio-tile {
 }
 
 .inventory-item,
-.open-inventory-btn {
+.open-inventory-btn,
+.open-shop-btn {
   height: 9vmin;
   width: 9vmin;
   background: var(--primary-background);
@@ -602,5 +603,30 @@ input:checked + .radio-tile {
 .myModal-tile img {
   height: 12vmin;
   width: 12vmin;
+}
+
+.select-items-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1vmin;
+}
+
+.select-items {
+  width: 45%;
+  aspect-ratio: 1 / 1;
+  background: var(--primary-background);
+  backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: .75rem;
+}
+
+.select-items > img {
+  width: 70%;
+  aspect-ratio: 1 / 1;
 }
 
