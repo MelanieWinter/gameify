@@ -7,7 +7,6 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 
-
 require('dotenv').config()
 require('./config/database')
 require('./config/passport')
@@ -17,6 +16,7 @@ const userRouter = require('./routes/user')
 const skillsRouter = require('./routes/skills')
 const goalsRouter = require('./routes/goals')
 const tasksRouter = require('./routes/tasks')
+const itemsRouter = require('./routes/items')
 
 var app = express();
 
@@ -45,11 +45,12 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.use('/', indexRouter);
-app.use('/user', userRouter);
+app.use('/', indexRouter)
+app.use('/user', userRouter)
 app.use('/skills', skillsRouter)
 app.use('/goals', goalsRouter)
 app.use('/tasks', tasksRouter)
+app.use('/', itemsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

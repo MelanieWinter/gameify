@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<ul>
+    <% items.forEach(function(i) { %>
+        <li>
+            <%= i.image %>
+            - 
+            Name: <%= i.name %>
+            -
+            Cost: <%= i.cost %>
+        </li>
+    <% }); %>
+</ul>
+<%- include('../partials/footer') %>
