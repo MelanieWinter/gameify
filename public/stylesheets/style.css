@@ -365,14 +365,6 @@ dialog h1 {
   text-shadow: 0 0 5px black;
 }
 
-.lorem {
-  font-size: 1.5rem;
-  padding: 2rem;
-  background-color: var(--primary-color);
-  color: white;
-  padding-top: 2vmin;
-}
-
 .logo-img {
   height: 3.5em;
   width: 3.5em
@@ -630,3 +622,53 @@ input:checked + .radio-tile {
   aspect-ratio: 1 / 1;
 }
 
+.lorem {
+  font-size: 1.5rem;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding-top: 10vmin;
+}
+
+.splash-div1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1vmin;
+  width: fit-content;
+  margin-top: 5vmin;
+}
+
+.splash-div1 > img {
+  width: 25vmin;
+  aspect-ratio: 1 / 1;
+  padding-left: -1vmin;
+}
+
+.splash-div1 > div {
+  width: 30%;
+  margin-left: 7vmin;
+}
+
+.splash-div1 > div > p {
+  padding-bottom: 2vmin;
+  font-size: 3rem;
+  font-family: 'Press Start 2P', sans-serif;
+}
+
+.splash-div1 > div > span {
+  padding-left: 2vmin;
+  display: block;
+  font-size: 2rem;
+}
+
+.splash-div2 {
+  margin-top: 5vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid limegreen;
+
+}

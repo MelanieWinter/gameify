@@ -43,10 +43,8 @@ async function updateAvatar(req, res) {
 
 async function updateUserItem(req, res) {
     const selectedItemId = req.body.radio;
-
     try {
         const selectedItem = await Item.findById(selectedItemId);
-        console.log('IMAGE ~~> ', selectedItem.image)
         const user = await User.findById(req.user._id);
         if (selectedItem && user.coin >= selectedItem.cost) {
             user.items.push({ _id: selectedItemId, image: selectedItem.image, name: selectedItem.name, cost: selectedItem.cost});
