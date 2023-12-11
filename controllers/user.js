@@ -40,19 +40,17 @@ async function updateAvatar(req, res) {
 }
 
 async function updateUserItem(req, res) {
+    console.log(req.body.radio)
+    console.log(req.user._id)
     try {
-        // Assuming the selected item's value is sent in the request body
         const selectedItem = req.body.radio;
-        const updatedUser = await User.findByIdAndUpdate(
-            req.user._id, 
-            { $push: { items: selectedItem } },
-            { new: true }
-        )
+        const user = await User.findById(req.user._id)
+        user.items.push(selectedItem)
+        await user.save()
         res.redirect('/user')
         
     } catch (error) {
         console.error('Error updating user items:', error);
-        // Handle the error or render an error page
         res.status(500).send('Internal Server Error');
     }
-};
+}

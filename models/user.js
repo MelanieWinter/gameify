@@ -20,7 +20,8 @@ const userSchema = new Schema({
     level: {
         type: Number,
         default: 1
-    }
+    },
+    items: []
 }, {
     timestamps: true
 })
