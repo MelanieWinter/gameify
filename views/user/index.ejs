@@ -348,7 +348,7 @@
 
                                     items.forEach(function(i) { %>
                                         <div class="input-container">
-                                            <input id="avatar<%= i %>" type="radio" name="radio" value="/images/avatars/<%= i %>.png">
+                                            <input id="item <%= i %>" type="radio" name="radio" value="<%= i._id %>">
                                             <div class="radio-tile">
                                                 <img src="<%= i.image %>" alt="" class="item-img">
                                                 Cost: <%= i.cost %>
@@ -374,6 +374,7 @@
     const openButton = document.querySelector('[data-open-modal]')
 
     const modal = document.querySelector('[data-modal]')
+
 
     openButton.addEventListener('click', () => {
         modal.showModal()

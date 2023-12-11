@@ -40,17 +40,20 @@ async function updateAvatar(req, res) {
 }
 
 async function updateUserItem(req, res) {
-    console.log(req.body.radio)
-    console.log(req.user._id)
+    const selectedItemId = req.body.radio;
+
     try {
-        const selectedItem = req.body.radio;
-        const user = await User.findById(req.user._id)
-        user.items.push(selectedItem)
-        await user.save()
-        res.redirect('/user')
-        
+        const selectedItem = await Item.findById(selectedItemId);
+        const user = await User.findById(req.user._id);
+        if (selectedItem && user.coin >= selectedItem.cost) {
+            user.items.push(selectedItemId);
+            user.coin -= selectedItem.cost;
+            await user.save();
+        } 
+        res.redirect('/user');
     } catch (error) {
         console.error('Error updating user items:', error);
         res.status(500).send('Internal Server Error');
     }
 }
+
