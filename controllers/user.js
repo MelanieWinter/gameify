@@ -16,6 +16,8 @@ async function index(req, res) {
     const goals = await Goal.find({ user: req.user._id }).populate('skill')
     const tasks = await Task.find({ user: req.user._id }).populate('skill goal')
     const items = await Item.find({})
+    const user = await User.findById(req.user._id).populate('items').exec();
+    console.log(user.items)
     res.render('user/index', {
         items,
         skills,
@@ -44,9 +46,10 @@ async function updateUserItem(req, res) {
 
     try {
         const selectedItem = await Item.findById(selectedItemId);
+        console.log('IMAGE ~~> ', selectedItem.image)
         const user = await User.findById(req.user._id);
         if (selectedItem && user.coin >= selectedItem.cost) {
-            user.items.push(selectedItemId);
+            user.items.push({ _id: selectedItemId, image: selectedItem.image, name: selectedItem.name, cost: selectedItem.cost});
             user.coin -= selectedItem.cost;
             await user.save();
         } 

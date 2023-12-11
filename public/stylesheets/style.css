@@ -87,9 +87,15 @@ main {
   padding: 1vmin;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background: var(--primary-background);
   backdrop-filter: blur(.5rem);
   box-shadow: 0 0 3px var(--translucent-primary-color);
+}
+
+.section-1 > div {
+  display: flex;
+  flex-direction: row;
 }
 
 .avatar-div {
@@ -483,6 +489,7 @@ dialog .input-container {
 input:checked + .radio-tile {
   background-color: var(--primary-color);
   box-shadow: 0 0 12px var(--primary-color);
+  color: hsl(0 0% 100%/ 0.7);
 }
 
 .form-group {
@@ -528,5 +535,72 @@ input:checked + .radio-tile {
 
 .hidden {
   display: none !important;
+}
+
+.inventory {
+  display: flex;
+  flex-direction: row;
+  gap: 1vmin;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 70%;
+  padding-block: .5vmin;
+  font-size: .75rem;
+}
+
+.inventory-item,
+.open-inventory-btn {
+  height: 9vmin;
+  width: 9vmin;
+  background: var(--primary-background);
+  backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: .75rem;
+}
+
+.inventory-item > img {
+  height: 8.5vmin;
+  width: 8.5vmin;
+}
+
+.inventory-modal > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5vmin;
+  padding: 1vmin;
+  width: 50vw;
+  margin-top: 2vmin;
+} 
+
+.inventory-modal > div > div {
+  height: 15vmin;
+  width: 15vmin;
+  background: var(--primary-background);
+  /* backdrop-filter: blur(.5rem); */
+  box-shadow: 0 0 3px var(--translucent-primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inventory-modal > div > div > img {
+  height: 13vmin;
+  width: 13vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vmin;
+}
+
+.myModal-tile img {
+  height: 12vmin;
+  width: 12vmin;
 }
 
