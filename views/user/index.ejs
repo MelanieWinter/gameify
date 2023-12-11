@@ -25,7 +25,6 @@
         <form action="/user/<%= user._id %>?_method=PUT" method="POST">
             <div class="radio-container">
                 <div class="radio-tile-group">
-
                     <div class="radio-tile-group">
                         <% for (let i = 1; i <= 50; i++) { %>
                             <div class="input-container">
@@ -36,14 +35,12 @@
                             </div>
                         <% } %>
                     </div>
-
                 </div>
             </div>
             <div class="form-buttons">
                 <button type="submit" formmethod="dialog">Cancel</button>
                 <button type="submit">Submit</button>
             </div>
-
         </form>
     </dialog>
 
@@ -331,7 +328,43 @@
 
         <div class="udd">
             <div class="user-data-title">Shop</div>
-            <div class="user-data-div" id="user-shop"></div>
+            <div class="user-data-div" id="user-shop">
+
+                <button id="openModalBtn" onclick="openModal()">Open Modal</button>
+
+                <dialog id="myModal">
+                    <h1>Welcome To The <b>Shop</b></h1>
+                    <form action="/user/items/<%= user._id %>?_method=PUT" method="POST">
+                        <div class="radio-container">
+                            <div class="radio-tile-group">
+                                <div class="radio-tile-group">
+                                    <% items.sort((a, b) => {
+                                        // First, sort by name
+                                        const nameComparison = a.name.localeCompare(b.name);
+
+                                        // If names are the same, sort by cost
+                                        return nameComparison === 0 ? a.cost - b.cost : nameComparison;
+                                    });
+
+                                    items.forEach(function(i) { %>
+                                        <div class="input-container">
+                                            <input id="avatar<%= i %>" type="radio" name="radio" value="/images/avatars/<%= i %>.png">
+                                            <div class="radio-tile">
+                                                <img src="<%= i.image %>" alt="" class="item-img">
+                                                Cost: <%= i.cost %>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" formmethod="dialog">Cancel</button>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </dialog>
+            </div>
         </div>
         
     </section>
@@ -339,11 +372,16 @@
 </main>
 <script>
     const openButton = document.querySelector('[data-open-modal]')
+
     const modal = document.querySelector('[data-modal]')
 
     openButton.addEventListener('click', () => {
         modal.showModal()
     })
+
+    function openModal() {
+    document.getElementById('myModal').showModal();
+}
 
     modal.addEventListener('click', e => {
         const dialogDimensions = modal.getBoundingClientRect()
