@@ -509,6 +509,23 @@ input:checked + .radio-tile {
   padding: .25em;
 }
 
+.item-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2vmin;
+}
+
+.item-main > div {
+  border: 1px solid var(--primary-color);
+  font-size: .5rem;
+}
+
+.item-img {
+  width: 10vmin;
+  height: 10vmin;
+}
+
 .hidden {
   display: none !important;
 }

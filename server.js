@@ -50,7 +50,7 @@ app.use('/user', userRouter)
 app.use('/skills', skillsRouter)
 app.use('/goals', goalsRouter)
 app.use('/tasks', tasksRouter)
-app.use('/', itemsRouter)
+app.use('/items', itemsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

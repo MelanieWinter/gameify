@@ -1,13 +1,14 @@
 <%- include('../partials/header') %>
-<ul>
+<div class="item-main" style="overflow: scroll;">
     <% items.forEach(function(i) { %>
-        <li>
-            <%= i.image %>
-            - 
+        <div>
+            <img src="<%= i.image %>" alt="" class="item-img">
+            <br>
             Name: <%= i.name %>
             -
             Cost: <%= i.cost %>
-        </li>
+        </div>
     <% }); %>
-</ul>
+</div>
+
 <%- include('../partials/footer') %>

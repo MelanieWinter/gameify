@@ -64,13 +64,13 @@ const storeItems = [];
 //     }
 // }
 
-// async function index(req, res) {
-//     const items = await Item.find({})
-//     res.render('items/index', {
-//         items, 
-//         title: 'All Store Items'
-//     })
-// }
+async function index(req, res) {
+    const items = await Item.find({})
+    res.render('items/index', {
+        items, 
+        title: 'All Store Items'
+    })
+}
 
 
 // seedStore();
