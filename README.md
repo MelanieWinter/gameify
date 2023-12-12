@@ -20,7 +20,7 @@ Welcome to Gameify, your personal RPG for turning daily tasks, goals, and skills
 Before you start, make sure you have the following:
 
 - **Node.js:** Gameify is built on Node.js. If you don't have it installed, you can download it [here](https://nodejs.org/en).
-- **MongoDB:** Gameify uses MongoDB to sotre your magical journey. You can install MongoDB by following the instructions [here](hhttps://www.mongodb.com/docs/manual/installation/).
+- **MongoDB:** Gameify uses MongoDB to sotre your magical journey. You can install MongoDB by following the instructions [here](https://www.mongodb.com/docs/manual/installation/).
 
 ### Installation
 1. **Clone the respository:**
