@@ -20,7 +20,7 @@ Welcome to Gameify, your personal RPG for turning daily tasks, goals, and skills
 Before you start, make sure you have the following:
 
 - **Node.js:** Gameify is built on Node.js. If you don't have it installed, you can download it [here](https://nodejs.org/en).
-- **MongoDB:** Gameify uses MongoDB to sotre your magical journey. You can install MongoDB by following the instructions [here](https://www.mongodb.com/docs/manual/installation/).
+- **MongoDB:** Gameify uses MongoDB to store your magical journey. You can install MongoDB by following the instructions [here](https://www.mongodb.com/docs/manual/installation/).
 
 ### Installation
 1. **Clone the respository:**
@@ -85,9 +85,9 @@ Now, you're all set to embark on your Gameify journey! May your tasks be conquer
 <p>
 
 ## Next Steps
-1. Running 'push' notifications to pop up to alert the user of achievements (i.e., leveling up, gaining xp, gaining coins).
+1. Running 'push' notifications to pop up and alert the user of achievements (i.e., leveling up, gaining xp, earning coins).
 2. The ability to delete items from the inventory.
-3. A community feature to create groups and compete in 'quests' and 'challenges' with other groups in task, goal, and skill achievements.
-4. User badges: If you compete in quests and challenges the user will gain badges to display on their public profile.
-5. Have a 'steak' notification on your daily tasks, that shows how many days in a row the user has completed that specific task.
+3. A community feature to create guilds and compete in 'raids' against other guilds in task, goal, and skill achievements.
+4. User badges: Badges can be earned by competing in challenges and raids, solo, or with a guild.
+5. Daily tasks will have a streak meter that shows how many days in a row the same task has been completed.
 6. Make the app mobile friendly and responsive.
