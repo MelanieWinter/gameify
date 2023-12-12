@@ -37,8 +37,6 @@ async function update(req, res) {
         if (updatedTask.status === 'Completed') {
             user.coin += updatedTask.coin
             user.xp += updatedTask.xp
-                updatedTask.xp = 0;
-                updatedTask.coin = 0;
             const skillId = updatedTask.skill
             const skill = await Skill.findById(skillId)
             if (updatedTask.xp === 50 && updatedTask.skill) {
@@ -51,16 +49,18 @@ async function update(req, res) {
                         skill.xp = 0;
                     }
                 }
-
+                updatedTask.xp = 0;
+                updatedTask.coin = 0;
                 await skill.save();
             }
             if (user.xp >= user.level * 50000) {
                 user.level += 1;
             }
+            updatedTask.xp = 0;
+            updatedTask.coin = 0;
             await user.save()
             await updatedTask.save()
         }
-        
         res.redirect(`/tasks/${taskId}`)
     } catch (err) {
         console.log('ERROR ~~>', err)
@@ -128,8 +128,8 @@ async function index(req, res) {
 
 async function resetDailyTasks() {
     try {
-        await Task.updateMany({ status: 'Completed' }, { $set: { status: 'In Progress' } })
-        await Task.updateMany({}, { $set: { xp: 50, coin: 10 } })
+        await Task.updateMany({ status: 'Completed' }, { status: 'In Progress' })
+        await Task.updateMany({}, { xp: 50, coin: 10 })
     } catch (err) {
     console.error('Error resetting tasks:', err)
     }
@@ -140,39 +140,9 @@ function scheduleReset() {
     reset.setHours(24, 0, 0, 0)
     let t = reset.getTime() - Date.now()
     setTimeout(function() {
-        resetDailyTasks()
+        resetDailyTasks() // Move this line above the setTimeout to reset immediately
         scheduleReset()
     }, t)
 }
 
 scheduleReset()
-
-// async function resetDailyTasks() {
-//     try {
-//         await Task.updateMany({ status: 'Completed' }, { $set: { status: 'In Progress' } });
-//         await Task.updateMany({}, { $set: { xp: 50 } });
-//         console.log('Tasks reset successfully.');
-//     } catch (err) {
-//         console.error('Error resetting tasks:', err);
-//     }
-// }
-
-// function scheduleReset() {
-//     // get current time
-//     let reset = new Date();
-//     // update the Hours, mins, secs to the 24th hour (which is when the next day starts)
-//     reset.setHours(24, 0, 0, 0);
-//     // calc amount of time until restart
-//     let t = reset.getTime() - Date.now();
-    
-//     // Call resetDailyTasks immediately
-//     resetDailyTasks();
-
-//     // Schedule the next reset
-//     setTimeout(function() {
-//         scheduleReset();
-//     }, t);
-// }
-
-// // Initial call to scheduleReset
-// scheduleReset();

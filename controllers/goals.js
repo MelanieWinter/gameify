@@ -37,8 +37,6 @@ async function update(req, res) {
         if (updatedGoal.status === 'Completed') {
             user.coin += updatedGoal.coin
             user.xp += updatedGoal.xp
-                updatedGoal.coin = 0
-                updatedGoal.xp = 0;
             const skillId = updatedGoal.skill
             const skill = await Skill.findById(skillId)
             if (updatedGoal.xp === 50 && updatedGoal.skill) {
@@ -56,6 +54,8 @@ async function update(req, res) {
             if (user.xp >= user.level * 50000) {
                 user.level += 1;
             }
+            updatedGoal.coin = 0
+            updatedGoal.xp = 0;
         }
         await user.save()
         await updatedGoal.save()

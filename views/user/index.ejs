@@ -24,7 +24,7 @@
         <div class="inventory">
             <% 
                 const shuffledItems = user.items.sort(() => Math.random() - 0.5);
-                shuffledItems.slice(0, 18).forEach(function(item) { 
+                shuffledItems.slice(0, 22).forEach(function(item) { 
             %>
                 <div class="inventory-item">
                     <img src="<%= item.image %>" alt="<%= item.name %>">

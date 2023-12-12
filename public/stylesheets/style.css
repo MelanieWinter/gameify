@@ -626,7 +626,7 @@ input:checked + .radio-tile {
   font-size: 1.5rem;
   padding: 2rem;
   background-color: var(--primary-color);
-  color: white;
+  color: whitesmoke;
   padding-top: 10vmin;
 }
 
@@ -640,7 +640,7 @@ input:checked + .radio-tile {
   margin-top: 5vmin;
 }
 
-.splash-div1 > img {
+.splashimg {
   width: 25vmin;
   aspect-ratio: 1 / 1;
   padding-left: -1vmin;
@@ -664,11 +664,139 @@ input:checked + .radio-tile {
 }
 
 .splash-div2 {
-  margin-top: 5vmin;
+  margin-top: 12vmin;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 2px solid limegreen;
+  font-size: 2rem;
+  text-decoration: underline;
+}
 
+.splash-div3 {
+  margin-top: 2vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+.splash-div3 > div {
+  width: 60%;
+}
+
+.splash-div4 {
+  margin-top: 12vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.div4-div {
+  position: relative;
+  left: 5%;
+  padding-top: 9vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+.div4-div > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.div4-div > div > p {
+  padding-top: 5vmin;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.div4-div > div > span {
+  padding-top: 4vmin;
+  font-size: 1rem;
+  font-weight: 200;
+  display: block;
+  text-align: center;
+  padding-bottom: 9vmin;
+  width: 80%;
+}
+
+.div4-div > div > img {
+  width: 100%;
+}
+
+.starfruit-div  {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  gap: 10vmin;
+  position: relative;
+  left: 5%;
+}
+
+.starfruit {
+  width: 40%;
+}
+
+.splash-div5 {
+  margin-top: 10vmin;
+}
+
+.splash-div5,
+.splash-div6 {
+  padding: 10vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5vmin;
+}
+
+.splash-div5 > div {
+  width: 35%;
+}
+
+.splash-div5 > div > p {
+  font-size: 1.3rem;
+  font-weight: 800;
+  width: 100%;
+  text-align: center;
+}
+
+.splash-div5 > div > span {
+  padding-top: 4vmin;
+  font-size: 1rem;
+  font-weight: 200;
+  display: block;
+  text-align: center;
+}
+
+.splash-div6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup {
+  padding: 2vmin;
+  border-radius: 5px;
+  color: whitesmoke;
+  background: var(--primary-background);
+  backdrop-filter: blur(.5rem);
+  box-shadow: 0 0 3px var(--translucent-primary-color);
 }
