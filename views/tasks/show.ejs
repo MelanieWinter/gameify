@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <% if (user) { %>
 
     <dialog data-modal id="showTaskModal" class="show-task-modal">
@@ -9,38 +8,32 @@
                 <span>Daily Task Name:</span>
                 <span><%= task.name %></span>
             </div> 
-            
             <% if (task.skill) { %>
                 <div>
                     <span>Associated Skill:</span>
                     <span><a href="/skills/<%= task.skill._id %>"><%= task.skill.skillName %></a></span>
                 </div> 
             <% } %>
-
             <% if (task.goal) { %>
                 <div>
                     <span>Associated Goal:</span>
                     <span><a href="/goals/<%= task.goal._id %>"><%= task.goal.name %></a></span>
                 </div>
             <% } %>
-
             <div>
                 <span>Type:</span>
                 <span><%= task.type %></span>
             </div>  
-
             <% if (task.description) { %>
                 <div>
                     <span>Description:</span>
                     <span><%= task.description %></span>
                 </div>
             <% } %>
-
             <div>
                 <span>Available XP:</span>
                 <span><%= task.xp %></span>
             </div>
-
             <div>
                 <span>Available Coin:</span>
                 <span><%= task.coin %></span>
@@ -52,7 +45,6 @@
                     <span><%= task.priority %></span>
                 </div>
             <% } %>
-
             <div>
                 <span>Status:</span>
                 <span><%= task.status %></span>
@@ -63,7 +55,6 @@
             <button onclick="window.location.href='/tasks/<%= task._id %>/edit'">Edit Task</button>
         </div>
     </dialog>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -78,7 +69,7 @@
         }
     
         modal.addEventListener('click', e => {
-            const dialogDimensions = modal.getBoundingClientRect();
+            const dialogDimensions = modal.getBoundingClientRect()
             if (
                 e.clientX < dialogDimensions.left ||
                 e.clientX > dialogDimensions.right ||
@@ -88,9 +79,7 @@
                 window.location.href='/user'
             }
         })
-    
     </script>
 
 <% } %>
-
 <%- include('../partials/footer') %>

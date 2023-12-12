@@ -1,8 +1,8 @@
 const User = require('../models/user')
 const Skill = require('../models/skill')
-const ToDoModels = require('../models/toDo'); 
-const Goal = ToDoModels.Goal;
-const Task = ToDoModels.Task;
+const ToDoModels = require('../models/toDo')
+const Goal = ToDoModels.Goal
+const Task = ToDoModels.Task
 const Item = require('../models/item')
 
 module.exports = {
@@ -16,7 +16,7 @@ async function index(req, res) {
     const goals = await Goal.find({ user: req.user._id }).populate('skill')
     const tasks = await Task.find({ user: req.user._id }).populate('skill goal')
     const items = await Item.find({})
-    const user = await User.findById(req.user._id).populate('items').exec();
+    const user = await User.findById(req.user._id).populate('items').exec()
     console.log(user.items)
     res.render('user/index', {
         items,
@@ -42,19 +42,18 @@ async function updateAvatar(req, res) {
 }
 
 async function updateUserItem(req, res) {
-    const selectedItemId = req.body.radio;
+    const selectedItemId = req.body.radio
     try {
-        const selectedItem = await Item.findById(selectedItemId);
-        const user = await User.findById(req.user._id);
+        const selectedItem = await Item.findById(selectedItemId)
+        const user = await User.findById(req.user._id)
         if (selectedItem && user.coin >= selectedItem.cost) {
-            user.items.push({ _id: selectedItemId, image: selectedItem.image, name: selectedItem.name, cost: selectedItem.cost});
-            user.coin -= selectedItem.cost;
-            await user.save();
+            user.items.push({ _id: selectedItemId, image: selectedItem.image, name: selectedItem.name, cost: selectedItem.cost})
+            user.coin -= selectedItem.cost
+            await user.save()
         } 
-        res.redirect('/user');
+        res.redirect('/user')
     } catch (error) {
-        console.error('Error updating user items:', error);
-        res.status(500).send('Internal Server Error');
+        console.error('Error updating user items:', error)
     }
 }
 

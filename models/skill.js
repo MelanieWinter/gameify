@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 skillSchema = new Schema({
     user: {
@@ -33,6 +33,8 @@ skillSchema = new Schema({
         default: 'In Progress',
         enum: [ 'In Progress', 'Completed' ]
     }
+}, {
+    timestamps: true
 })
 
-module.exports = mongoose.model('Skill', skillSchema);
+module.exports = mongoose.model('Skill', skillSchema)

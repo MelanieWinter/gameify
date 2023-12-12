@@ -1,6 +1,6 @@
 const User = require('../models/user')
 const Skill = require('../models/skill')
-const ToDoModels = require('../models/toDo');
+const ToDoModels = require('../models/toDo')
 const Goal = ToDoModels.Goal
 const Task = ToDoModels.Task
 
@@ -31,7 +31,7 @@ async function update(req, res) {
     try {
         const updatedGoal = await Goal.findOneAndUpdate(
             { _id: goalId },
-            { $set: req.body },
+            req.body,
             { new: true }
         )
         if (updatedGoal.status === 'Completed') {
@@ -46,30 +46,29 @@ async function update(req, res) {
                     skill.status = 'Completed'
                     if ( skill.status === 'Completed') {
                         user.xp += originalSkillXp
-                        skill.xp = 0;
+                        skill.xp = 0
                     }
                 }
-                await skill.save();
+                await skill.save()
             }
             if (user.xp >= user.level * 50000) {
-                user.level += 1;
+                user.level += 1
             }
             updatedGoal.coin = 0
-            updatedGoal.xp = 0;
+            updatedGoal.xp = 0
         }
         await user.save()
         await updatedGoal.save()
         res.redirect(`/goals/${goalId}`)
     } catch (err) {
         console.log('ERROR ~~>', err)
-        res.status(500).send('Internal Server Error')
     }
 }
 
 async function edit(req, res) {
     const goal = await Goal.findById(req.params.id).populate('skill')
     const skills = await Skill.find({ user: req.user._id })
-    const formattedDueDate = goal.dueDate ? goal.dueDate.toISOString().slice(0, 16) : '';
+    const formattedDueDate = goal.dueDate ? goal.dueDate.toISOString().slice(0, 16) : ''
     res.render('goals/edit', {
         formattedDueDate,
         skills,
@@ -95,7 +94,7 @@ async function newGoal(req, res) {
             user,
             skills,
             title: 'Add New Goal'
-        });
+        })
     } catch (err) {
         console.error('ERROR ~~>', err)
     }

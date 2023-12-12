@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
 const tasksCtrl = require('../controllers/tasks')
 
@@ -11,4 +11,4 @@ router.get('/:id/edit', tasksCtrl.edit)
 router.put('/:id', tasksCtrl.update)
 router.delete('/:id', tasksCtrl.delete)
 
-module.exports = router;
+module.exports = router

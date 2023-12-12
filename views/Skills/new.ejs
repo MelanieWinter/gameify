@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <% if (user) { %>
 
     <dialog data-modal id="newSkillModal" class="new-skill-modal">
@@ -7,23 +6,23 @@
         <form action="/skills" method="POST">
             <div class="form-group">
                 <label for="skill-name">Skill Name</label>
-                    <input type="text" name="skillName" id="skill-name" required>
+                <input type="text" name="skillName" id="skill-name" required>
             </div>
             <div class="form-group">
                 <label for="skill-category">Category</label>
-                    <input type="text" name="category" id="skill-category">
+                <input type="text" name="category" id="skill-category">
             </div>
             <div class="form-group">
                 <label for="skill-description">Description</label>
-                    <input type="text" name="description" id="skill-description">
+                <input type="text" name="description" id="skill-description">
             </div>
             <div class="form-group">
                 <label for="skill-priority">Priority</label> 
-                    <select name="priority" id="skill-priority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
+                <select name="priority" id="skill-priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
             </div>  
             <div class="form-buttons">
                 <button type="button" onclick="goBack()">Cancel</button>
@@ -32,34 +31,18 @@
         </form>
     </dialog>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.querySelector('[data-modal]')
+            modal.showModal()
+        })
+
         const modal = document.querySelector('[data-modal]')
-        modal.showModal()
-    })
 
-    const modal = document.querySelector('[data-modal]')
-
-    function goBack() {
-        window.history.back()
-    }
-
-    // modal.addEventListener('click', e => {
-    //     const dialogDimensions = modal.getBoundingClientRect();
-    //     if (
-    //         e.clientX < dialogDimensions.left ||
-    //         e.clientX > dialogDimensions.right ||
-    //         e.clientY < dialogDimensions.top ||
-    //         e.clientY > dialogDimensions.bottom
-    //     ) {
-    //         goBack()
-    //     }
-    // })
-
-</script>
+        function goBack() {
+            window.history.back()
+        }
+    </script>
 
 <% } %>
-
-
-
 <%- include('../partials/footer') %>

@@ -1,8 +1,8 @@
 const User = require('../models/user')
 const Skill = require('../models/skill')
-const ToDoModels = require('../models/toDo'); 
-const Goal = ToDoModels.Goal;
-const Task = ToDoModels.Task;
+const ToDoModels = require('../models/toDo')
+const Goal = ToDoModels.Goal
+const Task = ToDoModels.Task
 
 module.exports = {
     index,
@@ -28,30 +28,30 @@ async function deleteSkill(req, res) {
 }
 
 async function update(req, res) {
-    const user = req.user;
+    const user = req.user
     try {
-        const skillId = req.params.id;
+        const skillId = req.params.id
         const updatedSkill = await Skill.findOneAndUpdate(
             { _id: skillId },
-            { $set: req.body },
+            req.body,
             { new: true }
-        );
+        )
         if (updatedSkill.status === 'Completed') {
-            user.coin += updatedSkill.coin;
-            user.xp += updatedSkill.xp;
-            updatedSkill.percentCompleted = 100;
+            user.coin += updatedSkill.coin
+            user.xp += updatedSkill.xp
+            updatedSkill.percentCompleted = 100
             updatedSkill.coin = 0
             updatedSkill.xp = 0
             if (user.xp >= user.level * 50000) {
-                user.level += 1;
+                user.level += 1
             }
-            await user.save();
-            await updatedSkill.save();
+            await user.save()
+            await updatedSkill.save()
         }
-        res.redirect(`/skills/${skillId}`);
+        res.redirect(`/skills/${skillId}`)
     } catch (err) {
-        console.log('ERROR ~~>', err);
-        res.render(`/skills/${skill._id}`, { errorMsg: err.message });
+        console.log('ERROR ~~>', err)
+        res.render(`/skills/${skill._id}`, { errorMsg: err.message })
     }
 }
 

@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
 const goalsCtrl = require('../controllers/goals')
 
@@ -11,4 +11,4 @@ router.get('/:id/edit', goalsCtrl.edit)
 router.put('/:id', goalsCtrl.update)
 router.delete('/:id', goalsCtrl.delete)
 
-module.exports = router;
+module.exports = router

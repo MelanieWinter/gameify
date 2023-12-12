@@ -1,114 +1,119 @@
 <div class="wrapper">
-
   <%- include('./partials/header') %>
 
-  <header class="index-header">
-    <!-- <img src="/images/background/layers/sky.png" class="bg-1"> -->
-    <img src="/images/background/layers/rocks_2.png" class="bg-2">
-    <img src="/images/background/layers/rocks_1.png" class="bg-3">
-    <img src="/images/background/layers/clouds_4.png" class="bg-4">
-    <img src="/images/background/layers/clouds_3.png" class="bg-5">
-    <img src="/images/background/layers/clouds_2.png" class="bg-6">
-    <img src="/images/background/layers/clouds_1.png" class="bg-7">
-    <div class="custom-shape-divider-bottom-1701973184">
-      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
-          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
-          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
-      </svg>
-  </div>
+    <header class="index-header">
+      <img src="/images/background/layers/rocks_2.png" class="bg-2">
+      <img src="/images/background/layers/rocks_1.png" class="bg-3">
+      <img src="/images/background/layers/clouds_4.png" class="bg-4">
+      <img src="/images/background/layers/clouds_3.png" class="bg-5">
+      <img src="/images/background/layers/clouds_2.png" class="bg-6">
+      <img src="/images/background/layers/clouds_1.png" class="bg-7">
+      <div class="custom-shape-divider-bottom-1701973184">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+        </svg>
+    </div>
+      <% if (user) { %>
+        <h1 class="title"><%= titleTwo %> <%= user.name %></h1>
+      <% } else { %>
+        <h1 class="title"><%= title %></h1>
+      <% } %>
+    </header>
 
-    <% if (user) { %>
-      <h1 class="title"><%= titleTwo %> <%= user.name %></h1>
-    <% } else { %>
-      <h1 class="title"><%= title %></h1>
-    <% } %>
-  </header>
-
-  <section class="lorem">
-    <div class="splash-div1">
-      <img src="/images/avatars/29.png" alt="" class="splashimg img1">
-      <img src="/images/avatars/24.png" alt="" class="splashimg img1">
-      <img src="/images/avatars/26.png" alt="" class="splashimg img1">
-      <img src="/images/avatars/19.png" alt="" class="splashimg img1">
-      <div>
-        <p>Empower your journey</p>
-        <span>Master skills,</span>
-        <span>achieve dreams...</span>
-      </div>
-    </div>
-    <div class="splash-div2">
-      <h3>How It Works</h3>
-    </div>
-    <div class="splash-div3">
-      <div>
-        Embark on an Epic Journey: Level Up Your <b>Skills</b> through Conquering <b>Goals</b> and Mastering <b>Daily Tasks</b> in Your Personal RPG Adventure.
-      </div>
-    </div>
-    <div class="splash-div4">
-      <div class="div4-div">
+    <section class="lorem">
+      <div class="splash-div1">
+        <img src="/images/avatars/29.png" alt="" class="splashimg img1">
+        <img src="/images/avatars/24.png" alt="" class="splashimg img1">
+        <img src="/images/avatars/26.png" alt="" class="splashimg img1">
+        <img src="/images/avatars/19.png" alt="" class="splashimg img1">
         <div>
-          <img src="/images/userindex.png" alt="">
-          <p>Gameify Your Progress</p>
-          <span>
-            Conquer challenges, level up your skills, and progress through the ultimate quest of self-improvement. Slip-ups in real life mean setbacks in the game, adding a dynamic element to your personal growth journey.
-          </span>
+          <p>Empower your journey</p>
+          <span>Master skills,</span>
+          <span>achieve dreams...</span>
         </div>
-        <div class="div4-div-b">
-          <img src="/images/details.png" alt="">
-          <p>Add New Skills, Goals, and Tasks</p>
-          <span>
-            Fuel your journey by adding new skills, defining ambitious goals, and listing daily tasks to conquer. Customize your skill set, set challenging objectives, and break down your aspirations into manageable tasks.
-          </span>
+      </div>
+      <div class="splash-div2">
+        <h3>How It Works</h3>
+      </div>
+      <div class="splash-div3">
+        <div>
+          Embark on an Epic Journey: Level Up Your <b>Skills</b> through Conquering <b>Goals</b> and Mastering <b>Daily Tasks</b> in Your Personal RPG Adventure.
         </div>
-        <div class="div4-div-b">
-          <img src="/images/newtask.png" alt="">
-          <p>Daily Reset for Continuous Progress</p>
+      </div>
+      <div class="splash-div4">
+        <div class="div4-div">
+          <div>
+            <img src="/images/userindex.png" alt="">
+            <p>Gameify Your Progress</p>
+            <span>
+              Conquer challenges, level up your skills, and progress through the ultimate quest of self-improvement. Slip-ups in real life mean setbacks in the game, adding a dynamic element to your personal growth journey.
+            </span>
+          </div>
+          <div class="div4-div-b">
+            <img src="/images/details.png" alt="">
+            <p>Add New Skills, Goals, and Tasks</p>
+            <span>
+              Fuel your journey by adding new skills, defining ambitious goals, and listing daily tasks to conquer. Customize your skill set, set challenging objectives, and break down your aspirations into manageable tasks.
+            </span>
+          </div>
+          <div class="div4-div-b">
+            <img src="/images/newtask.png" alt="">
+            <p>Daily Reset for Continuous Progress</p>
+            <span>
+              Every day is a new chapter in your quest. Daily tasks automatically reset, giving you a fresh opportunity to tackle your goals and level up your skills. Embrace the chance to refine and optimize your strategy for an ever-evolving adventure.
+            </span>
+          </div>
+          <div>
+            <img src="/images/purchase.png" alt="">
+            <p>Shop and Enhance Your Journey</p>
+            <span>
+              Elevate your Gameify adventure by exploring the in-game shop—a marketplace where your hard-earned coins become a gateway to unlocking new possibilities and enhancing your character.
+            </span>
+          </div>
+        </div>
+        <div class="starfruit-div">
+            <img src="/images/books/50.png" alt="" class="starfruit">
+            <img src="/images/books/20.png" alt="" class="starfruit">
+            <img src="/images/books/48.png" alt="" class="starfruit">
+            <img src="/images/books/23.png" alt="" class="starfruit">
+            <img src="/images/books/47.png" alt="" class="starfruit">
+            <img src="/images/books/25.png" alt="" class="starfruit">
+        </div>
+      </div>
+      <div class="splash-div5">
+        <img src="/images/avatars/31.png" alt="" class="splashimg img2">
+        <div>
+          <p>Earn Coins Through Achievements</p>
           <span>
-            Every day is a new chapter in your quest. Daily tasks automatically reset, giving you a fresh opportunity to tackle your goals and level up your skills. Embrace the chance to refine and optimize your strategy for an ever-evolving adventure.
+            Every task, goal, and skill mastered in Gameify rewards you with coins. Accumulate wealth by consistently achieving your objectives, and watch your virtual coin purse grow.
           </span>
         </div>
         <div>
-          <img src="/images/purchase.png" alt="">
-          <p>Shop and Enhance Your Journey</p>
+          <p>Level Up with XP</p>
           <span>
-            Elevate your Gameify adventure by exploring the in-game shop—a marketplace where your hard-earned coins become a gateway to unlocking new possibilities and enhancing your character.
+            In addition to coins, successful task completion, goal achievement, and skill mastery also earn you experience points (XP). Level up your character by accumulating XP, showcasing your dedication and expertise in various aspects of life.
           </span>
         </div>
+        <img src="/images/avatars/22.png" alt="" class="splashimg img2">
       </div>
-      <div class="starfruit-div">
-          <img src="/images/books/50.png" alt="" class="starfruit">
-          <img src="/images/books/20.png" alt="" class="starfruit">
-          <img src="/images/books/48.png" alt="" class="starfruit">
-          <img src="/images/books/23.png" alt="" class="starfruit">
-          <img src="/images/books/47.png" alt="" class="starfruit">
-          <img src="/images/books/25.png" alt="" class="starfruit">
+      <div class="splash-div6">
+        <span>Start your adventure today . . . </span>
+        <a href="/auth/google" class="signup">SIGN UP</a>
       </div>
-    </div>
-    <div class="splash-div5">
-      <img src="/images/avatars/31.png" alt="" class="splashimg img2">
-      <div>
-        <p>Earn Coins Through Achievements</p>
-        <span>
-          Every task, goal, and skill mastered in Gameify rewards you with coins. Accumulate wealth by consistently achieving your objectives, and watch your virtual coin purse grow.
-        </span>
+      <div class="coindiv">
+        <img src="/images/coin6.png" alt="" class="indexcoin">
+        <img src="/images/coin1.png" alt="" class="indexcoin">
+        <img src="/images/coin4.png" alt="" class="indexcoin">
+        <img src="/images/coin2.png" alt="" class="indexcoin">
+        <img src="/images/coin5.png" alt="" class="indexcoin">
+        <img src="/images/coin3.png" alt="" class="indexcoin">
+        <img src="/images/coin7.png" alt="" class="indexcoin">
       </div>
-      <div>
-        <p>Level Up with XP</p>
-        <span>
-          In addition to coins, successful task completion, goal achievement, and skill mastery also earn you experience points (XP). Level up your character by accumulating XP, showcasing your dedication and expertise in various aspects of life.
-        </span>
-      </div>
-      <img src="/images/avatars/22.png" alt="" class="splashimg img2">
-    </div>
-    <div class="splash-div6">
-      <span>Start your adventure today . . . </span>
-      <a href="/auth/google" class="signup">SIGN UP</a>
-    </div>
-  </section>
+    </section>
 
   <%- include('./partials/footer') %>
-
 </div>
   
 

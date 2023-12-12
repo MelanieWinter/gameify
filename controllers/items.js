@@ -1,34 +1,11 @@
 const User = require('../models/user')
 const Item = require('../models/item')
 
-const storeItems = [];
+const storeItems = []
 
 module.exports = {
-    index,
-    // updateUserItem
+    index
 }
-
-// async function updateUserItem(req, res) {
-//     try {
-//         // Assuming the selected item's value is sent in the request body
-//         const selectedItemValue = req.body.radio;
-
-//         // Find the user (you might want to use the user ID instead of 'yourGoogleId')
-//         const user = await User.findOne(req.user._id);
-
-//         // Add the selected item to the user's items array
-//         user.items.push({ image: selectedItemValue, name: 'Item Name', cost: 10 }); // Modify accordingly
-
-//         // Save the user to update the items array
-//         await user.save();
-
-//         res.redirect('/'); // Redirect to the user's profile or another appropriate page
-//     } catch (error) {
-//         console.error('Error updating user items:', error);
-//         // Handle the error or render an error page
-//         res.status(500).send('Internal Server Error');
-//     }
-// };
 
 async function index(req, res) {
     const items = await Item.find({})
@@ -38,5 +15,65 @@ async function index(req, res) {
     })
 }
 
+////////////////////////////////////////////
 
-// seedStore();
+// Run to seed new items into the store
+
+// for (let i = 1; i <= 50; i++) {
+//     const newItem = {
+//         image: `/images/weapons/${i}.png`,
+//         name: `Weapon`,
+//         cost: Math.floor(Math.random() * 1000) + 1,
+//     }
+//     storeItems.push(newItem)
+// }
+
+// for (let i = 1; i <= 50; i++) {
+//     const newItem = {
+//         image: `/images/books/${i}.png`,
+//         name: `Book`,
+//         cost: Math.floor(Math.random() * 1000) + 1,
+//     }
+//     storeItems.push(newItem)
+// }
+
+// for (let i = 1; i <= 50; i++) {
+//     const newItem = {
+//         image: `/images/alchemy/${i}.png`,
+//         name: `Alchemy Item`,
+//         cost: Math.floor(Math.random() * 1000) + 1,
+//     }
+//     storeItems.push(newItem)
+// }
+
+// for (let i = 1; i <= 50; i++) {
+//     const newItem = {
+//         image: `/images/boots/${i}.png`,
+//         name: `Boots`,
+//         cost: Math.floor(Math.random() * 1000) + 1,
+//     }
+//     storeItems.push(newItem)
+// }
+
+// for (let i = 1; i <= 50; i++) {
+//     const newItem = {
+//         image: `/images/mushrooms/${i}.png`,
+//         name: `Mushroom`,
+//         cost: Math.floor(Math.random() * 1000) + 1,
+//     }
+//     storeItems.push(newItem)
+// }
+
+// console.log(storeItems)
+
+// async function seedStore() {
+//     try {
+//         await Item.deleteMany({})
+//         await Item.insertMany(storeItems)
+//         console.log('Store items seeded successfully.')
+//     } catch (error) {
+//         console.error('Error seeding store items:', error)
+//     }
+// }
+
+// seedStore()

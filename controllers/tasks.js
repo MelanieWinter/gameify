@@ -1,8 +1,8 @@
 const User = require('../models/user')
 const Skill = require('../models/skill')
-const ToDoModels = require('../models/toDo'); 
-const Goal = ToDoModels.Goal;
-const Task = ToDoModels.Task;
+const ToDoModels = require('../models/toDo')
+const Goal = ToDoModels.Goal
+const Task = ToDoModels.Task
 
 module.exports = {
     index,
@@ -27,11 +27,10 @@ async function deleteTask(req, res) {
 async function update(req, res) {
     const user = req.user
     const taskId = req.params.id
-
     try {
         const updatedTask = await Task.findOneAndUpdate(
             { _id: taskId },
-            { $set: req.body },
+            req.body,
             { new: true }
         )
         if (updatedTask.status === 'Completed') {
@@ -46,25 +45,24 @@ async function update(req, res) {
                     skill.status = 'Completed'
                     if ( skill.status === 'Completed') {
                         user.xp += originalSkillXp
-                        skill.xp = 0;
+                        skill.xp = 0
                     }
                 }
-                updatedTask.xp = 0;
-                updatedTask.coin = 0;
-                await skill.save();
+                updatedTask.xp = 0
+                updatedTask.coin = 0
+                await skill.save()
             }
             if (user.xp >= user.level * 50000) {
-                user.level += 1;
+                user.level += 1
             }
-            updatedTask.xp = 0;
-            updatedTask.coin = 0;
+            updatedTask.xp = 0
+            updatedTask.coin = 0
             await user.save()
             await updatedTask.save()
         }
         res.redirect(`/tasks/${taskId}`)
     } catch (err) {
         console.log('ERROR ~~>', err)
-        res.status(500).send('Internal Server Error')
     }
 }
 
@@ -112,7 +110,7 @@ async function newTask(req, res) {
             goals,
             skills,
             title: 'Add New Daily Task'
-        });
+        })
     } catch (err) {
         console.error('ERROR ~~>', err)
     }

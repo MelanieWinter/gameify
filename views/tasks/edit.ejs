@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <% if (user) { %>
 
     <dialog data-modal id="newTaskModal" class="new-task-modal">
@@ -7,36 +6,33 @@
         <form action="/tasks/<%= task._id %>?_method=PUT" method="POST">
             <div class="form-group">
                 <label for="task-type">Type</label>
-                    <select name="type" id="task-type" required>
-                        <option value="dailyTask">Daily Task</option>
-                    </select>
+                <select name="type" id="task-type" required>
+                    <option value="dailyTask">Daily Task</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="task-name">Name</label>
-                    <input type="text" name="name" id="task-name" required value="<%= task.name %>">
+                <input type="text" name="name" id="task-name" required value="<%= task.name %>">
             </div>
-
             <div class="form-group">
                 <label for="task-description">Description</label>
-                    <input type="text" name="description" id="task-description" value="<%= task.description %>">
+                <input type="text" name="description" id="task-description" value="<%= task.description %>">
             </div>
-
             <div class="form-group">
                 <label for="task-skill">Associated Skill</label>
-                    <select name="skill" id="task-skill">
-                        <% if (!task.skill) { %>
-                            <option value="" disabled selected>Select a skill</option>
-                            <% skills.forEach(function(skill) { %> 
-                                <option value="<%= skill._id %>"><%= skill.skillName %></option>
-                            <% }) %>
-                        <% } else if (task.skill) { %>
-                            <% skills.forEach(function(skill) { %> 
-                                <option value="<%= skill._id %>" <%= skill.skillName === task.skill.skillName ? 'selected' : '' %>><%= skill.skillName %></option>
-                            <% }) %>
-                        <% } %>
-                    </select>
+                <select name="skill" id="task-skill">
+                    <% if (!task.skill) { %>
+                        <option value="" disabled selected>Select a skill</option>
+                        <% skills.forEach(function(skill) { %> 
+                            <option value="<%= skill._id %>"><%= skill.skillName %></option>
+                        <% }) %>
+                    <% } else if (task.skill) { %>
+                        <% skills.forEach(function(skill) { %> 
+                            <option value="<%= skill._id %>" <%= skill.skillName === task.skill.skillName ? 'selected' : '' %>><%= skill.skillName %></option>
+                        <% }) %>
+                    <% } %>
+                </select>
             </div>
-
             <div class="form-group">
                 <label for="task-goal">Associated Goal</label>
                     <select name="goal" id="task-goal">
@@ -52,7 +48,6 @@
                         <% } %>
                     </select>
             </div>
-
             <div class="form-group">
                 <label for="task-priority">Priority</label> 
                 <select name="priority" id="task-priority">
@@ -61,7 +56,6 @@
                     <option value="high" <%= task.priority === 'high' ? 'selected' : '' %>>High</option>
                 </select>
             </div> 
-
             <div class="form-group">
                 <label for="taskStatus">Status</label>
                 <select name="status" id="taskStatus">
@@ -69,7 +63,6 @@
                     <option value="Completed" <%= task.status === 'Completed' ? 'selected' : '' %>>Completed</option>
                 </select>
             </div> 
-
             <div class="form-buttons">
                 <button type="submit" onclick="goBack()">Cancel</button>
                 <button type="submit" name="action" value="submitGoal">Submit</button>
@@ -80,44 +73,31 @@
         </form>
     </dialog>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.querySelector('[data-modal]')
+            modal.showModal()
+        })
+
         const modal = document.querySelector('[data-modal]')
-        modal.showModal()
-    })
 
-    const modal = document.querySelector('[data-modal]')
-
-    function goBack() {
-        window.history.back()
-    }
-
-    // modal.addEventListener('click', e => {
-    //     const dialogDimensions = modal.getBoundingClientRect();
-    //     if (
-    //         e.clientX < dialogDimensions.left ||
-    //         e.clientX > dialogDimensions.right ||
-    //         e.clientY < dialogDimensions.top ||
-    //         e.clientY > dialogDimensions.bottom
-    //     ) {
-    //         goBack()
-    //     }
-    // })
-
-    document.getElementById('skillSelect').addEventListener('change', function() {
-        let selectedSkill = this.value
-        let goalSelect = document.getElementById('goalSelect')
-        goalSelect.disabled = !selectedSkill
-        if (selectedSkill) {
-            let goals = document.querySelectorAll('#goalSelect option')
-            goals.forEach(function(goal) {
-                goal.disabled = (goal.value && goal.getAttribute('data-skill') !== selectedSkill)
-            })
-            goalSelect.value = ''
+        function goBack() {
+            window.history.back()
         }
-    })
-</script>
+
+        document.getElementById('skillSelect').addEventListener('change', function() {
+            let selectedSkill = this.value
+            let goalSelect = document.getElementById('goalSelect')
+            goalSelect.disabled = !selectedSkill
+            if (selectedSkill) {
+                let goals = document.querySelectorAll('#goalSelect option')
+                goals.forEach(function(goal) {
+                    goal.disabled = (goal.value && goal.getAttribute('data-skill') !== selectedSkill)
+                })
+                goalSelect.value = ''
+            }
+        })
+    </script>
 
 <% } %>
-
 <%- include('../partials/footer') %>

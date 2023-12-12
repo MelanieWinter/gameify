@@ -1,66 +1,54 @@
 <%- include('../partials/header') %>
-
 <% if (user) { %>
-
 
     <dialog data-modal id="showGoalModal" class="show-goal-modal show-modal">
         <h1>Details For Your <b><%= goal.name %></b> Goal</h1>
-
         <section>
             <div>
                 <span>Goal Name:</span>
                 <span><%= goal.name %></span>
             </div>  
-
             <% if (goal.skill) { %>
                 <div>
                     <span>Associated Skill:</span>
                     <span><a href="/skills/<%= goal.skill._id %>"><%= goal.skill.skillName %></a></span>
                 </div> 
             <% } %>
-
             <div>
                 <span>Type:</span>
                 <span><%= goal.type %></span>
             </div>  
-
             <% if (goal.description) { %>
                 <div>
                     <span>Description:</span>
                     <span><%= goal.description %></span>
                 </div>
             <% } %>
-
             <div>
                 <span>Available XP:</span>
                 <span><%= goal.xp %></span>
             </div>
-
             <div>
                 <span>Available Coin:</span>
                 <span><%= goal.coin %></span>
             </div>
-
             <% if (goal.dueDate) { %>
                 <div>
                     <span>Due Date:</span>
                     <span><%= goal.dueDate.toLocaleDateString() %></span>
                 </div>
             <% } %>
-
             <% if (goal.priority) { %>
                 <div>
                     <span>Priority:</span>
                     <span><%= goal.priority %></span>
                 </div>
             <% } %>
-            
             <div>
                 <span>Status:</span>
                 <span><%= goal.status %></span>
             </div>
         </section>
-
         <div class="form-buttons">
             <button type="button" onclick="window.location.href='/user'">Account</button>
             <button onclick="window.location.href='/goals/<%= goal._id %>/edit'">Edit Goal</button>
@@ -80,7 +68,7 @@
         }
     
         modal.addEventListener('click', e => {
-            const dialogDimensions = modal.getBoundingClientRect();
+            const dialogDimensions = modal.getBoundingClientRect()
             if (
                 e.clientX < dialogDimensions.left ||
                 e.clientX > dialogDimensions.right ||
@@ -90,9 +78,7 @@
                 window.location.href='/user'
             }
         })
-    
     </script>
 
 <% } %>
-
 <%- include('../partials/footer') %>

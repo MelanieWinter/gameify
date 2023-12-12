@@ -1,10 +1,8 @@
 <%- include('../partials/header') %>
-
 <% if (user) { %>
 
     <dialog data-modal id="showSkillModal" class="show-skill-modal show-modal">
         <h1>Details For Your <b><%= skill.skillName %></b> Skill</h1>
-        
         <section>
             <div>Name: <%= skill.skillName %></div>
             <% if (skill.gategory) { %>
@@ -21,7 +19,6 @@
             <div>Percent Completed: <%= skill.percentCompleted %></div>
             <div>Status: <%= skill.status %></div>
         </section>
-
         <section>
             <h3>Goals For This Skill</h3>
             <% goals.forEach(function(g) { %>
@@ -34,21 +31,19 @@
                 </div>
             <% }) %>
         </section>
-
         <section>
             <h3>Daily Tasks For This Skill</h3>
             <% tasks.forEach(function(t) { %>
                 <div>
                     <span><a href="/tasks/<%= t._id %>"><%= t.name %></a></span>
+                    <span>| <%= t.status %></span>
                 </div>
             <% }) %>
         </section>
-
         <div class="form-buttons">
             <button type="button" onclick="window.location.href='/user'">Account</button>
             <button onclick="window.location.href='/skills/<%= skill._id %>/edit'">Edit Skill</button>
         </div>
-
     </dialog>
 
     <script>
@@ -64,7 +59,7 @@
         }
     
         modal.addEventListener('click', e => {
-            const dialogDimensions = modal.getBoundingClientRect();
+            const dialogDimensions = modal.getBoundingClientRect()
             if (
                 e.clientX < dialogDimensions.left ||
                 e.clientX > dialogDimensions.right ||
@@ -78,5 +73,4 @@
     </script>
 
 <% } %>
-
 <%- include('../partials/footer') %>

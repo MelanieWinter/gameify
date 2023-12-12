@@ -89,10 +89,11 @@ Now, you're all set to embark on your Gameify journey! May your tasks be conquer
 2. The ability to delete items from the inventory.
 3. Add more items into the shop and separate them by category.
 4. Have the user avatar able to equip items and gain skill levels.
-3. A community feature to create guilds and compete in 'raids' against other guilds in task, goal, and skill achievements.
-4. User badges: Badges can be earned by competing in challenges and raids, solo, or with a guild.
-5. Daily tasks will have a streak meter that shows how many days in a row the same task has been completed.
-6. Make the app mobile friendly and responsive.
+5. Implement a health meter that goes down if you don't make daily progress. The health meter will reset every next level.
+6. A community feature to create guilds and compete in 'raids' against other guilds in task, goal, and skill achievements.
+7. User badges: Badges can be earned by competing in challenges and raids, solo, or with a guild.
+8. Daily tasks will have a streak meter that shows how many days in a row the same task has been completed.
+9. Make the app mobile friendly and responsive.
 <br><br><br>
 <p align="center">
 <img src="public/images/alchemy/15.png" alt="Gif of the user experience" width="200">

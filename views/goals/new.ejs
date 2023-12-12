@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <% if (user) { %>
 
     <dialog data-modal id="newGoalModal" class="new-goal-modal">
@@ -7,9 +6,9 @@
         <form action="/goals" method="POST">
             <div class="form-group">
                 <label for="goal-type">Type</label>
-                    <select name="type" id="goal-type" required>
-                        <option value="goal">Goal</option>
-                    </select>
+                <select name="type" id="goal-type" required>
+                    <option value="goal">Goal</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="goal-skill">Skill</label>
@@ -22,23 +21,23 @@
             </div>
             <div class="form-group">
                 <label for="goal-name">Name</label>
-                    <input type="text" name="name" id="goal-name" required>
+                <input type="text" name="name" id="goal-name" required>
             </div>
             <div class="form-group">
                 <label for="goal-description">Description</label>
-                    <input type="text" name="description" id="goal-description">
+                <input type="text" name="description" id="goal-description">
             </div>
             <div class="form-group">
                 <label for="goal-due-date">Due Date</label>
-                    <input type="date" name="dueDate" id="goal-due-date">
+                <input type="date" name="dueDate" id="goal-due-date">
             </div>
             <div class="form-group">
                 <label for="goal-priority">Priority</label>
-                    <select name="priority" id="goal-priority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
+                <select name="priority" id="goal-priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
             </div> 
             <div class="form-buttons">
                 <button type="submit" onclick="goBack()">Cancel</button>
@@ -47,31 +46,18 @@
         </form>
     </dialog>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.querySelector('[data-modal]')
+            modal.showModal()
+        })
+
         const modal = document.querySelector('[data-modal]')
-        modal.showModal()
-    })
 
-    const modal = document.querySelector('[data-modal]')
-
-    function goBack() {
-        window.history.back()
-    }
-
-    // modal.addEventListener('click', e => {
-    //     const dialogDimensions = modal.getBoundingClientRect();
-    //     if (
-    //         e.clientX < dialogDimensions.left ||
-    //         e.clientX > dialogDimensions.right ||
-    //         e.clientY < dialogDimensions.top ||
-    //         e.clientY > dialogDimensions.bottom
-    //     ) {
-    //         goBack()
-    //     }
-    // })
-</script>
+        function goBack() {
+            window.history.back()
+        }
+    </script>
 
 <% } %>
-
 <%- include('../partials/footer') %>

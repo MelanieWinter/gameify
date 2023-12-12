@@ -1,7 +1,5 @@
 <%- include('../partials/header') %>
-
 <% if (user) { %>
-
     <dialog data-modal id="newGoalModal" class="new-goal-modal">
         <h1 class="step-title">Edit Your <b><%= goal.name %></b> Goal</h1>
         <form action="/goals/<%= goal._id %>?_method=PUT" method="POST">
@@ -19,12 +17,10 @@
                 <label for="goal-description">Description</label>
                     <input type="text" name="description" id="goal-description" value="<%= goal.description %>">
             </div>
-
             <div class="form-group">
                 <label for="goal-due-date">Due Date</label>
                 <input type="date" name="dueDate" id="goal-due-date" value="<% if (goal.dueDate) { %><%= goal.dueDate.toISOString().split('T')[0] %><% } %>">
             </div>
-
             <div class="form-group">
                 <label for="goal-skill">Associated Skill</label>
                     <select name="skill" id="goal-skill">
@@ -40,7 +36,6 @@
                         <% } %>
                     </select>
             </div>
-
             <div class="form-group">
                 <label for="goal-priority">Priority</label> 
                 <select name="priority" id="goal-priority">
@@ -49,7 +44,6 @@
                     <option value="high" <%= goal.priority === 'high' ? 'selected' : '' %>>High</option>
                 </select>
             </div> 
-
             <div class="form-group">
                 <label for="goalStatus">Status</label>
                 <select name="status" id="goalStatus">
@@ -57,7 +51,6 @@
                     <option value="Completed" <%= goal.status === 'Completed' ? 'selected' : '' %>>Completed</option>
                 </select>
             </div>
-
             <div class="form-buttons">
                 <button type="submit" onclick="goBack()">Cancel</button>
                 <button type="submit" name="action" value="submitGoal">Submit</button>
@@ -67,33 +60,19 @@
             <button type="submit" onclick="return confirm('Are you sure you want to delete this GOAL?')">Delete Goal</button>
         </form>
     </dialog>
-
+    
     <script>
+        const modal = document.querySelector('[data-modal]')
+
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.querySelector('[data-modal]')
             modal.showModal()
         })
-    
-        const modal = document.querySelector('[data-modal]')
-    
+
         function goBack() {
             window.history.back()
         }
-    
-        // modal.addEventListener('click', e => {
-        //     const dialogDimensions = modal.getBoundingClientRect();
-        //     if (
-        //         e.clientX < dialogDimensions.left ||
-        //         e.clientX > dialogDimensions.right ||
-        //         e.clientY < dialogDimensions.top ||
-        //         e.clientY > dialogDimensions.bottom
-        //     ) {
-        //         goBack()
-        //     }
-        // })
-    
     </script>
 
 <% } %>
-
 <%- include('../partials/footer') %>

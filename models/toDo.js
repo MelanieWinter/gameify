@@ -47,11 +47,13 @@ const toDoSchema = new Schema({
         default: 'In Progress',
         enum: [ 'In Progress', 'Completed' ]
     }
+}, {
+    timestamps: true
 })
 
-const Goal = mongoose.model('Goal', toDoSchema);
-module.exports.Goal = Goal;
+const Goal = mongoose.model('Goal', toDoSchema)
+module.exports.Goal = Goal
 
 
-const Task = mongoose.model('Task', toDoSchema);
-module.exports.Task = Task;
+const Task = mongoose.model('Task', toDoSchema)
+module.exports.Task = Task
