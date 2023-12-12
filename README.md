@@ -10,7 +10,7 @@ Embark on a grand quest for self-improvement with Gameify, your enchanted gatewa
 - Express.js
 - Node.js
 - Javascript
-- HTML
+- EJS
 - CSS
 
 ## Getting Started 
@@ -52,16 +52,16 @@ npm start
 
 **Choose an Avatar:**
 - Navigate to the mystical cogwheel beneath your name to choose an avatar that resonates with you. 
-- Dive into a collection of 50 enchanting images and pick the one that best represents your epic journey in the realm of Gameify!
+- Dive into a collection of 50 enchanting images and pick the one that best represents your epic journey in the realm of Gameify.
 
 **Daily Tasks:**
-- Your daily tasks reset daily. Add them once, conquer them daily to receive xp and coins!
+- Your daily tasks reset daily. Add them once, conquer them daily to receive xp and coins.
 
-**Skills' Completion Meter**
-- As you conquer daily tasks and goals linked to a skill, witness the skillls' completion meter soar. The more milestones you achieve, the closer you get to mastering that skill!
-- Experience a grand surge of xp and coins upon reaching the pinnacle of a skill's mastery!
+**Skills' Completion Meter:**
+- As you conquer daily tasks and goals linked to a skill, witness the skillls' completion meter soar. The more milestones you achieve, the closer you get to mastering that skill.
+- Experience a grand surge of xp and coins upon reaching the pinnacle of a skill's mastery.
 
-**Ascend the Levels**
+**Ascend the Levels:**
 - Ascend the levels by accumulating xp.
 - With every 50,000xp, elevate yourself to a new level, unlocking fresh realms of achievement and expertise.
 
