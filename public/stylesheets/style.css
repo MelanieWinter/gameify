@@ -810,6 +810,7 @@ input:checked + .radio-tile {
 
 .coindiv {
   margin-top: 5vmin;
+  padding-bottom: 5vmin;
   display: flex;
   flex-direction: row;
   justify-content: center;
